@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CompanySeeder extends Seeder
@@ -14,16 +15,16 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        $companies = Company::factory(10)->create();
+        DB::table('companies')->insert([
+        'company_name' => 'sparky',
+        'contact_name' => 'taha',
+        'email' => 'sparky@gmail.com',
+        'password' => 'Sp4rky11',
+        'phone_number' => 1234567890,
+        'username' => 'sparky',
+        'address' => 'hfjkdshkjds',
+        'domain' =>'Design',
+        ]);
 
-        foreach ($companies as $company) {
-            User::create([
-                'name' => 'User Name',
-                'email' => 'user@example.com',
-                'password' => Hash::make('password'),
-                'userable_id' => $company->id,
-                'userable_type' => Company::class,
-            ]);
-        }
     }
 }

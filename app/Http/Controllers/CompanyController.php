@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Http\Middleware\connectMiddleware;
+use App\Models\Announce;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
 //--------------------------------------------------------
     public function dashboard(){
-        return view('dashboards.company.dashboard');
+        $announces = Announce::all();
+        return view('dashboards.company.dashboard' , compact('announces'));
     }
 //--------------------------------------------------------
     public function currentInterns(){

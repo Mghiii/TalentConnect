@@ -19,4 +19,7 @@ class Company extends Model
         'address',
         'domain',
     ];
+    public function announces(){
+        return $this->hasMany(Announce::class , "company_id");
+    }
 }

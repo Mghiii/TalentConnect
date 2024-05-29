@@ -28,7 +28,7 @@
                                     Announcements</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    15</h4>
+                                    {{$announces->count()}}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="#Announcements" onclick="smoothScroll(event)">
@@ -137,12 +137,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for ($i = 1; $i <= 10; $i++)
+                                        @foreach ( $announces as $announce )
                                             <tr
                                                 class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
                                                 <td
                                                     class="border px-4 py-2 text-center font-normal hover:font-semibold text-gray-600 hover:text-gray-800">
-                                                    Announcement {{ $i }}
+                                                    {{$announce->title}}
                                                 </td>
                                                 <td class="border px-4 py-2 text-center">{{ rand(1, 100) }}</td>
                                                 <td class="border px-4 py-2 text-center">{{ rand(50, 200) }}</td>
@@ -160,7 +160,7 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                        @endfor
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -27,7 +27,7 @@
                 <div class="lg:w-1/3 lg:pl-4">
                     <div class="mb-40 rounded-full">
 
-                        <form action="#" method="POST" enctype="multipart/form-data"
+                        <form action="{{route('company.dashboard.internships.store')}}" method="POST" enctype="multipart/form-data"
                             class="bg-white p-8 rounded-lg shadow-md">
                             @csrf
                             <h2 class="md:text-4xl text-2xl font-bold text-gray-600">Add Training <span
@@ -37,44 +37,60 @@
                                 <label for="title" class="block text-gray-700 font-bold mb-2">Title:</label>
                                 <input type="text" id="title" name="title"
                                     class="border-gray-300 rounded-md shadow-sm focus:border-gray-500 focus:ring-gray-500 w-full"
-                                    required>
+                                    >
+                                @error('title')
+                                    <span class="text-red-500">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="mb-6">
                                 <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
                                 <textarea id="description" name="description" rows="3"
-                                    class="border-gray-300 rounded-md shadow-sm focus:border-gray-500 focus:ring-gray-500 w-full" required></textarea>
+                                    class="border-gray-300 rounded-md shadow-sm focus:border-gray-500 focus:ring-gray-500 w-full" ></textarea>
+                                @error('description')
+                                    <span class="text-red-500">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="mb-6">
                                 <label for="skills" class="block text-gray-700 font-bold mb-2">Skills Required:</label>
                                 <input type="text" id="skills" name="skills"
                                     class="border-gray-300 rounded-md shadow-sm focus:border-gray-500 focus:ring-gray-500 w-full"
-                                    required>
+                                    >
+                                @error('skills')
+                                    <span class="text-red-500">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="mb-6">
                                 <label for="benefits" class="block text-gray-700 font-bold mb-2">Benefits:</label>
                                 <textarea id="benefits" name="benefits" rows="3"
-                                    class="border-gray-300 rounded-md shadow-sm focus:border-gray-500 focus:ring-gray-500 w-full" required></textarea>
+                                    class="border-gray-300 rounded-md shadow-sm focus:border-gray-500 focus:ring-gray-500 w-full" ></textarea>
+                                @error('benefits')
+                                    <span class="text-red-500">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="mb-6">
                                 <label for="contact" class="block text-gray-700 font-bold mb-2">Contact
                                     Information:</label>
                                 <input type="text" id="contact" name="contact"
                                     class="border-gray-300 rounded-md shadow-sm focus:border-gray-500 focus:ring-gray-500 w-full"
-                                    required>
+                                    >
+                                @error('contact')
+                                    <span class="text-red-500">{{$message}}</span>
+                                @enderror
                             </div>
-                            <div class="mb-6">
-                                <label for="image" class="block text-gray-700 font-bold mb-2">Image:</label>
-                                <div class="flex items-center">
-                                    <div class="flex-grow">
-                                        <span class="text-gray-500">Enhance your announcement with an eye-catching image
-                                            selection.</span>
-                                        <input type="file" id="image" name="image"
-                                            class="block w-full mt-1 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500">
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="hidden" value="{{Auth::user()->id}}" name="company_id">
                             <button type="submit"
-                                class="w-full flex justify-center bg-gray-400 hover:bg-gray-500 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-100">Submit</button>
+                                class=" mb-6 w-full flex justify-center bg-gray-400 hover:bg-gray-500 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-100">Submit</button>
+
+                                @if ($errors->any())
+                                <div class=" bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                         </form>
                     </div>
                 </div>
