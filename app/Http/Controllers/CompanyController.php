@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Middleware\connectMiddleware;
 use App\Models\Announce;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -38,7 +39,8 @@ class CompanyController extends Controller
     }
 //--------------------------------------------------------
     public function profile(){
-        return view('dashboards.company.profile');
+        $companies = Company::all();
+        return view('dashboards.company.profile' , compact('companies'));
     }
 //--------------------------------------------------------
 }

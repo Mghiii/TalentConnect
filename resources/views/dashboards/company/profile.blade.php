@@ -5,6 +5,10 @@
         <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
             <x-sidebar-company />
         </div>
+        @php
+        $company = $companies->firstWhere('id', Auth::user()->id);
+        @endphp
+
         <div class="flex-1 p-8 overflow-y-auto">
             <div class="">
                 <div class="w-full h-[250px]">
@@ -15,7 +19,7 @@
                     <img src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg"
                         class="w-40 border-4 border-white rounded-full">
                     <div class="flex items-center space-x-2 mt-2">
-                        <p class="text-2xl">{{Auth::user()->name}}</p>
+                        <p class="text-2xl">{{$company->username}}</p>
                         <span class="bg-blue-500 rounded-full p-1" title="Verified">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +28,7 @@
                             </svg>
                         </span>
                     </div>
-                    <p class="text-sm text-gray-500">Riad salam, Agadir</p>
+                    <p class="text-sm text-gray-500">{{$company->address}}</p>
                 </div>
 
 
@@ -58,31 +62,31 @@
                 <ul class="mt-2 text-gray-700">
                     <li class="flex border-y py-2">
                         <span class="font-bold w-32">Company name</span>
-                        <span class="text-gray-700">: PlanB</span>
+                        <span class="text-gray-700">{{$company->company_name}}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Contact name</span>
-                        <span class="text-gray-700">: Abderrahim mghimimi</span>
+                        <span class="text-gray-700">{{$company->contact_name}}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Joined</span>
-                        <span class="text-gray-700">: 2024-05-01 15:23:06</span>
+                        <span class="text-gray-700">{{$company->domain}}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Mobile</span>
-                        <span class="text-gray-700">: 0689841509</span>
+                        <span class="text-gray-700">{{$company->phone_number}}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Email</span>
-                        <span class="text-gray-700">: PlanB@example.com</span>
+                        <span class="text-gray-700">{{$company->email}}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Location</span>
-                        <span class="text-gray-700">: Riad salam ,Agadir</span>
+                        <span class="text-gray-700">{{$company->address}}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Last Update</span>
-                        <span class="text-gray-700">: 2024-05-01 15:23:06</span>
+                        <span class="text-gray-700">{{$company->updated_at}}</span>
                     </li>
                 </ul>
             </div>
