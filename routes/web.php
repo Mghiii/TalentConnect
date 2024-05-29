@@ -39,7 +39,8 @@ Route::middleware(['auth','role:company'])->group(function () {
     Route::get('/company/dashboard/former-interns', [CompanyController::class, 'internFormer'])->name('company.dashboard.internFormer');
     Route::get('/company/dashboard/current-interns', [CompanyController::class, 'currentInterns'])->name('company.dashboard.currentInterns');
     Route::get('/company/dashboard/new-announcement', [CompanyController::class, 'internships'])->name('company.dashboard.internships');
-    Route::post('/company/dashboard/new-announcement' , [annonceController::class , 'store'])->name('company.dashboard.internships.store');
+    Route::post('/company/dashboard/announce/store' , [annonceController::class , 'store'])->name('company.dashboard.internships.store');
+    Route::delete('/company/dashboard/announce/delete/{announce}', [annonceController::class, 'destroy'])->name('company.announce.delete');
     Route::get('/company/dashboard/profile', [CompanyController::class, 'profile'])->name('company.dashboard.profile');
     Route::get('/company/dashboard/help-centre', [CompanyController::class, 'help'])->name('company.dashboard.help');
     Route::get('/company/dashboard/notifications', [CompanyController::class, 'notifications'])->name('company.dashboard.notifications');

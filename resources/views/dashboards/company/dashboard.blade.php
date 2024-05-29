@@ -155,9 +155,13 @@
                                                     <a href="#" class="text-green-500 hover:text-green-700 mr-2">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="#" class="text-red-500 hover:text-red-700">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </a>
+                                                    <form action="{{ route('company.announce.delete', $announce->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="text-red-500 hover:text-red-700" type="submit">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

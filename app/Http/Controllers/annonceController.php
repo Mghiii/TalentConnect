@@ -68,8 +68,10 @@ class annonceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Announce $announce)
     {
-        //
+        $announce->delete();
+        return redirect()->route('company.dashboard');
     }
+
 }
