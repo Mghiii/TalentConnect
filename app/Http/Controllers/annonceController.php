@@ -46,7 +46,8 @@ class annonceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $announce = Announce::findOrFail($id);
+        return view('dashboards.company.showAnnounce', compact('announce'));
     }
 
     /**
@@ -54,17 +55,27 @@ class annonceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $announce = Announce::findOrFail($id);
+        return view('dashboards.company.editAnnounce', compact('announce'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Announce $announce)
     {
-        //
-    }
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'skills' => 'required',
+            'benefits' => 'required',
+            'contact' => 'required',
+        ]);
 
+        $announce->update($request->all());
+
+        return redirect()->route('company.dashboard');
+    }
     /**
      * Remove the specified resource from storage.
      */

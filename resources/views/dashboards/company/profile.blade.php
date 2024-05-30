@@ -6,7 +6,7 @@
             <x-sidebar-company />
         </div>
         @php
-        $company = $companies->firstWhere('id', Auth::user()->id);
+            $company = $companies->firstWhere('id', Auth::user()->id);
         @endphp
 
         <div class="flex-1 p-8 overflow-y-auto">
@@ -19,7 +19,7 @@
                     <img src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg"
                         class="w-40 border-4 border-white rounded-full">
                     <div class="flex items-center space-x-2 mt-2">
-                        <p class="text-2xl">{{$company->username}}</p>
+                        <p class="text-2xl">{{ $company->username }}</p>
                         <span class="bg-blue-500 rounded-full p-1" title="Verified">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -28,7 +28,7 @@
                             </svg>
                         </span>
                     </div>
-                    <p class="text-sm text-gray-500">{{$company->address}}</p>
+                    <p class="text-sm text-gray-500">{{ $company->address }}</p>
                 </div>
 
 
@@ -37,7 +37,9 @@
                         <button
                             class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                             <i class="fas fa-edit"></i>
-                            <span>Edit</span>
+                            <a href="{{ route('company.editProfile', ['id' => $company->id]) }}" class="text-gray-100">
+                                <span>Edit</span>
+                            </a>
                         </button>
                         <div class="flex items-center justify-center flex-col space-y-4">
                             <label for="file-upload"
@@ -62,31 +64,31 @@
                 <ul class="mt-2 text-gray-700">
                     <li class="flex border-y py-2">
                         <span class="font-bold w-32">Company name</span>
-                        <span class="text-gray-700">{{$company->company_name}}</span>
+                        <span class="text-gray-700">{{ $company->company_name }}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Contact name</span>
-                        <span class="text-gray-700">{{$company->contact_name}}</span>
+                        <span class="text-gray-700">{{ $company->contact_name }}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Joined</span>
-                        <span class="text-gray-700">{{$company->domain}}</span>
+                        <span class="text-gray-700">{{ $company->domain }}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Mobile</span>
-                        <span class="text-gray-700">{{$company->phone_number}}</span>
+                        <span class="text-gray-700">{{ $company->phone_number }}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Email</span>
-                        <span class="text-gray-700">{{$company->email}}</span>
+                        <span class="text-gray-700">{{ $company->email }}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Location</span>
-                        <span class="text-gray-700">{{$company->address}}</span>
+                        <span class="text-gray-700">{{ $company->address }}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Last Update</span>
-                        <span class="text-gray-700">{{$company->updated_at}}</span>
+                        <span class="text-gray-700">{{ $company->updated_at }}</span>
                     </li>
                 </ul>
             </div>
@@ -96,7 +98,10 @@
                 <div class="relative px-4 py-8 bg-white">
                     <div class="max-w-2xl mx-auto">
                         <h2 class="text-2xl font-bold text-gray-900 mb-6">Settings</h2>
-                        <form class="space-y-6 ">
+                        <form class="space-y-6" action="{{ route('company.updatePassword', ['id' => $company->id]) }}"
+                            method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="relative">
                                 <label for="current-password" class="block font-medium text-gray-700 mb-2">Current
                                     Password</label>
@@ -107,11 +112,13 @@
                                     onclick="togglePasswordVisibility('current-password', this)">
                                     <i class="fas fa-eye pt-8 text-gray-600"></i>
                                 </div>
+                                @error('current_password')
+                                    <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="relative">
-                                <label for="new-password" class="block font-medium text-gray-700 mb-2">New
-                                    Password</label>
+                                <label for="new-password" class="block font-medium text-gray-700 mb-2">New Password</label>
                                 <input type="password" id="new-password" name="new_password" autocomplete="new-password"
                                     required
                                     class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
@@ -119,40 +126,24 @@
                                     onclick="togglePasswordVisibility('new-password', this)">
                                     <i class="fas fa-eye pt-8 text-gray-600"></i>
                                 </div>
+                                @error('new_password')
+                                    <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="relative">
                                 <label for="confirm-password" class="block font-medium text-gray-700 mb-2">Confirm
                                     Password</label>
-                                <input type="password" id="confirm-password" name="confirm_password"
-                                    autocomplete="confirm-password" required
+                                <input type="password" id="confirm-password" name="new_password_confirmation"
+                                    autocomplete="new-password" required
                                     class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                                     onclick="togglePasswordVisibility('confirm-password', this)">
                                     <i class="fas fa-eye pt-8 text-gray-600"></i>
                                 </div>
-                            </div>
-                            <div>
-                                <label for="language" class="block font-medium text-gray-700 mb-2">Language</label>
-                                <select id="language" name="language"
-                                    class="block w-full px-4 py-3 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
-                                    <option value="en">English</option>
-                                    <option value="es">Español</option>
-                                    <option value="fr">Français</option>
-                                    <option value="de">Deutsch</option>
-                                </select>
-                            </div>
-
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input type="checkbox" id="notification-settings" name="notification-settings"
-                                        class="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 rounded focus:ring-2 focus:ring-gray-500">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="notification-settings" class="font-medium text-gray-700">
-                                        Receive notifications
-                                    </label>
-                                </div>
+                                @error('new_password_confirmation')
+                                    <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
@@ -162,6 +153,7 @@
                                 </button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
