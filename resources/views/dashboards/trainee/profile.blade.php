@@ -5,6 +5,9 @@
           <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
               <x-sidebar-trainee />
           </div>
+          @php
+            $trainee = $trainees->firstWhere('email', Auth::user()->email);
+        @endphp
           <div class="flex-1 p-8 overflow-y-auto">
               <div class="">
                   <div class="w-full h-[250px]">
@@ -15,9 +18,9 @@
                       <img src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg"
                           class="w-40 border-4 border-white rounded-full">
                       <div class="flex items-center space-x-2 mt-2">
-                          <p class="text-2xl">Mghimimi Abderrahim</p>
+                          <p class="text-2xl">{{$trainee->username}}</p>
                       </div>
-                      <p class="text-sm text-gray-500">Riad salam, Agadir</p>
+                      <p class="text-sm text-gray-500">{{$trainee->address}}</p>
                   </div>
 
 
@@ -51,31 +54,31 @@
                   <ul class="mt-2 text-gray-700">
                       <li class="flex border-y py-2">
                           <span class="font-bold w-32">full name</span>
-                          <span class="text-gray-700">: Abderrahim Mghimimi</span>
+                          <span class="text-gray-700">{{$trainee->first_name}} {{$trainee->last_name}}</span>
                       </li>
                       <li class="flex border-b py-2">
                           <span class="font-bold w-32">Contact name</span>
-                          <span class="text-gray-700">: Abderrahim mghimimi</span>
+                          <span class="text-gray-700">{{$trainee->domain}}</span>
                       </li>
                       <li class="flex border-b py-2">
                           <span class="font-bold w-32">Joined</span>
-                          <span class="text-gray-700">: 2024-05-01 15:23:06</span>
+                          <span class="text-gray-700">{{$trainee->created_at}}</span>
                       </li>
                       <li class="flex border-b py-2">
                           <span class="font-bold w-32">Mobile</span>
-                          <span class="text-gray-700">: 0689841509</span>
+                          <span class="text-gray-700">{{$trainee->phone_number}}</span>
                       </li>
                       <li class="flex border-b py-2">
                           <span class="font-bold w-32">Email</span>
-                          <span class="text-gray-700">: PlanB@example.com</span>
+                          <span class="text-gray-700">{{$trainee->email}}</span>
                       </li>
                       <li class="flex border-b py-2">
                           <span class="font-bold w-32">Location</span>
-                          <span class="text-gray-700">: Riad salam ,Agadir</span>
+                          <span class="text-gray-700">{{$trainee->address}}</span>
                       </li>
                       <li class="flex border-b py-2">
                           <span class="font-bold w-32">Last Update</span>
-                          <span class="text-gray-700">: 2024-05-01 15:23:06</span>
+                          <span class="text-gray-700">{{$trainee->updated_at}}</span>
                       </li>
                   </ul>
               </div>

@@ -77,7 +77,10 @@
                                     <span class="text-red-500">{{$message}}</span>
                                 @enderror
                             </div>
-                            <input type="hidden" value="{{Auth::user()->id}}" name="company_id">
+                            @php
+                                $company = $companies->firstWhere('email', Auth::user()->email);
+                            @endphp
+                            <input type="hidden" value="{{$company->id}}" name="company_id">
                             <button type="submit"
                                 class=" mb-6 w-full flex justify-center bg-gray-400 hover:bg-gray-500 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-100">Submit</button>
 

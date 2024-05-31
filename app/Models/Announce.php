@@ -20,5 +20,8 @@ class Announce extends Model
     public function company() {
         return $this->belongsTo(Company::class);
     }
+    public function offres(){
+        return $this->hasMany(Offre::class , "announce_id");
+    }
 
 }

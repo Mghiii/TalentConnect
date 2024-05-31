@@ -19,4 +19,8 @@ class Trainee extends Model
         'phone_number',
         'domain'
     ];
+    public function offres(){
+        return $this->hasMany(Offre::class , "trainee_id");
+    }
+
 }

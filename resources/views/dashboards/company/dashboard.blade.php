@@ -13,9 +13,7 @@
             </header>
             <section>
                 <div class="mt-12 ">
-                    @php
-                        $announces = $announces->where('company_id', Auth::user()->id);
-                    @endphp
+                
 
 
                     <div class="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announce;
+use App\Models\Offre;
+use App\Models\Trainee;
 use Illuminate\Http\Request;
 
 class TraineeController extends Controller
 {
     public function dashboard(){
-        return view('dashboards.trainee.dashboard');
+        $announces = Announce::all();
+
+        return view('dashboards.trainee.dashboard' , compact('announces'));
     }
     public function search(){
         return view('dashboards.trainee.search');
@@ -22,7 +27,8 @@ class TraineeController extends Controller
         return view('dashboards.trainee.help');
     }
     public function profile(){
-        return view('dashboards.trainee.profile');
+        $trainees = Trainee::all();
+        return view('dashboards.trainee.profile' , compact('trainees'));
     }
     public function details(){
         return view('dashboards.trainee.details');

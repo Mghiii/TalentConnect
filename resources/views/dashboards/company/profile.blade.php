@@ -6,7 +6,7 @@
             <x-sidebar-company />
         </div>
         @php
-            $company = $companies->firstWhere('id', Auth::user()->id);
+            $company = $companies->firstWhere('email', Auth::user()->email);
         @endphp
 
         <div class="flex-1 p-8 overflow-y-auto">
@@ -16,7 +16,7 @@
                         class="w-full h-full rounded-tl-lg rounded-tr-lg">
                 </div>
                 <div class="flex flex-col items-center -mt-20">
-                    <img src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg"
+                    <img src="{{ asset('storage/'. $company->company_image) }}"
                         class="w-40 border-4 border-white rounded-full">
                     <div class="flex items-center space-x-2 mt-2">
                         <p class="text-2xl">{{ $company->username }}</p>
@@ -47,14 +47,23 @@
                                 <div class="flex items-centre justify-center"> <i class="fas fa-camera mt-1 pr-1"></i>
                                     <span>Update</span>
                                 </div>
-                                <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                            </label>
-                        </div>
-                        <button
+                                <form action="{{ route('company.updateImage', $company->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <input id="file-upload" name="company_image" type="file" class=" sr-only">
+                                    <button type="submit">Upload</button>
+                                </form>
+                    </label>
+                    </div>
+                        <form action="{{route('company.profile.destroy' ,  $company->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
                             class="flex items-center bg-red-600 hover:bg-red-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                             <i class="fas fa-trash-alt"></i>
                             <span>Delete</span>
                         </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -72,7 +81,7 @@
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Joined</span>
-                        <span class="text-gray-700">{{ $company->domain }}</span>
+                        <span class="text-gray-700">{{ $company->created_at }}</span>
                     </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Mobile</span>

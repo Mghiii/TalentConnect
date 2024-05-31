@@ -18,8 +18,12 @@ class Company extends Model
         'username',
         'address',
         'domain',
+        'company_image',
     ];
     public function announces(){
         return $this->hasMany(Announce::class , "company_id");
+    }
+    public function getImageAttribute($value){
+        return $value??'profile/userImage.png';
     }
 }
