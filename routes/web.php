@@ -54,7 +54,7 @@ Route::middleware(['auth', 'role:company'])->group(function () {
     Route::get('/company/profile/edit/{id}', [CompanyController::class, 'editProfile'])->name('company.editProfile');
     Route::put('/company/profile/update/{id}', [CompanyController::class, 'updateProfile'])->name('company.updateProfile');
     Route::put('/company/profile/image/update/{company}' , [CompanyController::class , 'updateImage'])->name('company.updateImage');
-    Route::put('/company/update-password/{id}', [CompanyController::class, 'updatePassword'])->name('company.updatePassword');
+    Route::put('/company/update-password/{company}', [CompanyController::class, 'updatePassword'])->name('company.updatePassword');
     Route::delete('/company/profile/destroy/{company}', [CompanyController::class , 'destroyProfile'])->name('company.profile.destroy');
     Route::get('/company/dashboard/profile', [CompanyController::class, 'profile'])->name('company.dashboard.profile');
     Route::get('/company/dashboard/help-centre', [CompanyController::class, 'help'])->name('company.dashboard.help');

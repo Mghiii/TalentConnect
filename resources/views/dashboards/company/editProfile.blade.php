@@ -5,9 +5,7 @@
         <div class="w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
             <x-sidebar-company />
         </div>
-        @php
-            $company = $companies->firstWhere('id', Auth::user()->id);
-        @endphp
+      
 
         <div class="flex-1 p-8 overflow-y-auto">
             <div class="bg-white rounded-lg shadow-xl p-8">
@@ -52,7 +50,7 @@
 
                 <div class="bg-gray-100 rounded-lg p-8 mt-8">
                     <h4 class="text-xl text-gray-900 font-bold mb-6">Edit Company Profile</h4>
-                    <form class="space-y-6" action="{{ route('company.updatePassword', ['id' => $company->id]) }}"
+                    <form class="space-y-6" action="{{ route('company.updatePassword',  $company->id) }}"
                         method="POST">
                         @csrf
                         @method('PUT')

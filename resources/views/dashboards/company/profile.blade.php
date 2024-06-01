@@ -33,38 +33,32 @@
 
 
                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
-                    <div class="flex  items-center space-x-4 mt-2">
-                        <button
-                            class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                    <div class="flex items-center space-x-4 mt-2">
+                        <a href="{{ route('company.editProfile', ['id' => $company->id]) }}" class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                             <i class="fas fa-edit"></i>
-                            <a href="{{ route('company.editProfile', ['id' => $company->id]) }}" class="text-gray-100">
-                                <span>Edit</span>
-                            </a>
-                        </button>
-                        <div class="flex items-center justify-center flex-col space-y-4">
-                            <label for="file-upload"
-                                class="relative cursor-pointer bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm transition duration-100">
-                                <div class="flex items-centre justify-center"> <i class="fas fa-camera mt-1 pr-1"></i>
-                                    <span>Update</span>
-                                </div>
-                                <form action="{{ route('company.updateImage', $company->id) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <input id="file-upload" name="company_image" type="file" class=" sr-only">
-                                    <button type="submit">Upload</button>
-                                </form>
-                    </label>
-                    </div>
-                        <form action="{{route('company.profile.destroy' ,  $company->id)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="flex items-center bg-red-600 hover:bg-red-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                            <i class="fas fa-trash-alt"></i>
-                            <span>Delete</span>
-                        </button>
+                            <span>Edit</span>
+                        </a>
+
+                        <form action="{{ route('company.updateImage', $company->id) }}" method="POST" enctype="multipart/form-data" id="imageForm" class="flex items-center">
+                            @csrf
+                            @method('PUT')
+                            <label for="file-upload" class="flex items-center cursor-pointer bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm transition duration-100">
+                                <i class="fas fa-camera mt-1 pr-1"></i>
+                                <span>Update</span>
+                                <input id="file-upload" name="company_image" type="file" class="sr-only" onchange="document.getElementById('imageForm').submit()">
+                            </label>
+                        </form>
+
+                        <form action="{{ route('company.profile.destroy', $company->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="flex items-center bg-red-600 hover:bg-red-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                                <i class="fas fa-trash-alt"></i>
+                                <span>Delete</span>
+                            </button>
                         </form>
                     </div>
+
                 </div>
             </div>
 
@@ -107,7 +101,7 @@
                 <div class="relative px-4 py-8 bg-white">
                     <div class="max-w-2xl mx-auto">
                         <h2 class="text-2xl font-bold text-gray-900 mb-6">Settings</h2>
-                        <form class="space-y-6" action="{{ route('company.updatePassword', ['id' => $company->id]) }}"
+                        <form class="space-y-6" action="{{ route('company.updatePassword', $company->id) }}"
                             method="POST">
                             @csrf
                             @method('PUT')
@@ -117,6 +111,7 @@
                                 <input type="password" id="current-password" name="current_password"
                                     autocomplete="current-password" required
                                     class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                                <input type="hidden" value="{{$company->password}}" name="initail">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                                     onclick="togglePasswordVisibility('current-password', this)">
                                     <i class="fas fa-eye pt-8 text-gray-600"></i>
@@ -128,14 +123,14 @@
 
                             <div class="relative">
                                 <label for="new-password" class="block font-medium text-gray-700 mb-2">New Password</label>
-                                <input type="password" id="new-password" name="new_password" autocomplete="new-password"
+                                <input type="password" id="new-password" name="password" autocomplete="new-password"
                                     required
                                     class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                                     onclick="togglePasswordVisibility('new-password', this)">
                                     <i class="fas fa-eye pt-8 text-gray-600"></i>
                                 </div>
-                                @error('new_password')
+                                @error('password')
                                     <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -143,14 +138,14 @@
                             <div class="relative">
                                 <label for="confirm-password" class="block font-medium text-gray-700 mb-2">Confirm
                                     Password</label>
-                                <input type="password" id="confirm-password" name="new_password_confirmation"
+                                <input type="password" id="confirm-password" name="confirm_password"
                                     autocomplete="new-password" required
                                     class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                                     onclick="togglePasswordVisibility('confirm-password', this)">
                                     <i class="fas fa-eye pt-8 text-gray-600"></i>
                                 </div>
-                                @error('new_password_confirmation')
+                                @error('confirm_password')
                                     <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                                 @enderror
                             </div>

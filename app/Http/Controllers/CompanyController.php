@@ -61,8 +61,8 @@ public function internApp(){
         }
 
     public function editProfile($id){
-        $companies = Company::findOrFail($id);
-        return view('dashboards.company.editProfile', compact('companies'));
+        $company = Company::findOrFail($id);
+        return view('dashboards.company.editProfile', compact('company'));
         }
 
     public function updateProfile(Request $request, $id)
@@ -89,33 +89,17 @@ public function internApp(){
             return redirect()->route('company.dashboard.profile')->with('success', 'Profile updated successfully.');
         }
 
-    public function updatePassword(Request $request, $id)
-        {
-            // Validate input
-            $request->validate([
-                'current_password' => 'required|string|min:8',
-                'new_password' => 'required|string|min:8|confirmed',
-            ]);
 
-            // Retrieve the company
-            $company = Company::findOrFail($id);
+        public function destroyProfile(Company $company){
+            if (Auth::check()) {
+                $company->delete();
+                User::where('email', $company->email)->delete();
+                Announce::where('company_id', $company->id)->delete();
 
-            // Check if the current authenticated user's password matches the current password input
-            if (!Hash::check($request->current_password, $company->password)) {
-                return redirect()->back()->withErrors(['current_password' => 'Current password does not match']);
+                Auth::logout();
             }
 
-            // Update the company's password
-            $company->password = Hash::make($request->new_password);
-            $company->save();
-
-            return redirect()->route('company.dashboard.profile')->with('success', 'Password updated successfully');
-        }
-        public function destroyProfile(Company $company){
-            $company->delete();
-            User::where('email',$company->email)->delete();
-            Announce::where('company_id',$company->id)->delete();
-            return redirect()->route('logout');
+            return redirect()->route('login.show');
         }
         public function updateImage(Request $request , Company $company){
             $formField = $request->validate([
@@ -130,6 +114,21 @@ public function internApp(){
 
             return redirect()->route('company.dashboard.profile');
         }
+
+        public function updatePassword(Request $request, Company $company)
+        {
+            $validatedData = $request->validate([
+                'password' => 'required|string|min:8|regex:/^(?=.*[A-Z])(?=.*[0-9]).+$/',
+                'confirm_password' => 'required|same:password',
+            ]);
+
+            if (Hash::check($request->current_password, $request->initail)) {
+                $company->password = Hash::make($validatedData['password']);
+                $company->save();
+                return redirect()->route('company.dashboard.profile');
+            } else {
+                return redirect()->route('company.dashboard');
+            }}
 
 //--------------------------------------------------------
 }
