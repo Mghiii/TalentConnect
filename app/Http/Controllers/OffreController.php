@@ -88,12 +88,6 @@ return redirect()->route('trainee.dashboard');
     }
 
 
-    public function accepted(Offre $offre)
-    {
-        $offre->update(['status' => 'accepted']);
-
-        return redirect()->route('company.dashboard.internApp');
-    }
 
     public function rejected(Offre $offre)
     {

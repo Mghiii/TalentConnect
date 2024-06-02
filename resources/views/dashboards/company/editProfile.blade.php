@@ -5,7 +5,7 @@
         <div class="w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
             <x-sidebar-company />
         </div>
-      
+
 
         <div class="flex-1 p-8 overflow-y-auto">
             <div class="bg-white rounded-lg shadow-xl p-8">
@@ -71,10 +71,10 @@
 
                         <div class="relative">
                             <label for="new-password" class="block font-medium text-gray-700 mb-2">New Password</label>
-                            <input type="password" id="new-password" name="new_password" autocomplete="new-password"
+                            <input type="password" id="new-password" name="password" autocomplete="new-password"
                                 required
                                 class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
-                            @error('new_password')
+                            @error('password')
                                 <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"

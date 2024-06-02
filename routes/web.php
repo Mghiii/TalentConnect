@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterCompanyController;
 use App\Http\Controllers\RegisterTraineeController;
 use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OffreController;
 use App\Models\Company;
@@ -37,12 +38,12 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth', 'role:company'])->group(function () {
     Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard');
     Route::get('/company/dashboard/intern-applicants', [CompanyController::class, 'internApp'])->name('company.dashboard.internApp');
-    Route::put('/company/dashboard/intern-applicants/accepted/{offre}' , [OffreController::class , 'accepted'])->name('company.dashboard.internApp.accepted');
     Route::put('/company/dashboard/intern-applicants/rejected/{offre}' , [OffreController::class , 'rejected'])->name('company.dashboard.internApp.rejected');
     Route::get('/company/dashboard/former-interns', [CompanyController::class, 'internFormer'])->name('company.dashboard.internFormer');
     Route::get('/company/dashboard/current-interns', [CompanyController::class, 'currentInterns'])->name('company.dashboard.currentInterns');
     Route::get('/company/dashboard/new-announcement', [CompanyController::class, 'internships'])->name('company.dashboard.internships');
-
+    Route::get('/company/dashboard/inteenship/create/{offre}', [InternshipController::class, 'create'])->name('company.dashboard.internships.create');
+    Route::post('/company/dashboard/inteenship/store/{offre}', [InternshipController::class, 'store'])->name('company.dashboard.internships.create.store');
 
     Route::post('/company/dashboard/announce/store', [AnnonceController::class, 'store'])->name('company.dashboard.internships.store');
     Route::delete('/company/dashboard/announce/delete/{announce}', [AnnonceController::class, 'destroy'])->name('company.announce.delete');

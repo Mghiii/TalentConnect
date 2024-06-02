@@ -157,13 +157,9 @@
                                                     <a href="/company/dashboard/trainee-profile/{{ $offre->id }}" class="text-blue-500 hover:text-blue-700 mr-2">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <form action="{{route('company.dashboard.internApp.accepted' , $offre->id)}}" method="post">
-                                                    @csrf
-                                                    @method("PUT")
-                                                    <button  type="submit" class="text-green-500 hover:text-green-700 mr-2">
+                                                    <a  href="{{route('company.dashboard.internships.create' ,$offre->id )}}" class="text-green-500 hover:text-green-700 mr-2">
                                                         <i class="fas fa-check-circle"></i>
-                                                    </button>
-                                                    </form>
+                                                    </a>
                                                     <form action="{{route('company.dashboard.internApp.rejected' , $offre->id)}}" method="post">
                                                         @csrf
                                                         @method("PUT")

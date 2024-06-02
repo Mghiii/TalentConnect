@@ -118,11 +118,12 @@ public function internApp(){
         public function updatePassword(Request $request, Company $company)
         {
             $validatedData = $request->validate([
+                'current_password' => 'required|string',
                 'password' => 'required|string|min:8|regex:/^(?=.*[A-Z])(?=.*[0-9]).+$/',
                 'confirm_password' => 'required|same:password',
             ]);
 
-            if (Hash::check($request->current_password, $request->initail)) {
+            if (Hash::check($request->current_password, $company->password)) {
                 $company->password = Hash::make($validatedData['password']);
                 $company->save();
                 return redirect()->route('company.dashboard.profile');
