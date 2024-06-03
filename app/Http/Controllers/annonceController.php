@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announce;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class annonceController extends Controller
@@ -46,8 +47,9 @@ class annonceController extends Controller
      */
     public function show(string $id)
     {
+        $company = Company::where('email', auth()->user()->email)->first();
         $announce = Announce::findOrFail($id);
-        return view('dashboards.company.showAnnounce', compact('announce'));
+        return view('dashboards.company.showAnnounce', compact('company','announce'));
     }
 
     /**
@@ -55,8 +57,9 @@ class annonceController extends Controller
      */
     public function edit(string $id)
     {
+        $company = Company::where('email', auth()->user()->email)->first();
         $announce = Announce::findOrFail($id);
-        return view('dashboards.company.editAnnounce', compact('announce'));
+        return view('dashboards.company.editAnnounce', compact('company','announce'));
     }
 
     /**
