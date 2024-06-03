@@ -81,6 +81,11 @@
                           <span class="text-gray-700">{{ $trainee->address }}</span>
                       </li>
                       <li class="flex border-b py-2">
+                          <span class="font-bold w-32">Domain</span>
+                          <span
+                              class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-300 cursor-pointer">{{ $trainee->domain }}</span>
+                      </li>
+                      <li class="flex border-b py-2">
                           <span class="font-bold w-32">Last Update</span>
                           <span class="text-gray-700">{{ $trainee->updated_at }}</span>
                       </li>

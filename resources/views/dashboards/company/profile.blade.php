@@ -92,6 +92,13 @@
                         <span class="font-bold w-32">Location</span>
                         <span class="text-gray-700">{{ ucwords($company->address) }}</span>
                     </li>
+                    <li class="flex items-center justify-between py-3">
+                        <div class="flex items-center">
+                            <span class="font-bold text-gray-700 mr-16">Domain</span>
+                            <span
+                                class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-300 cursor-pointer">{{ ucwords($company->domain) }}</span>
+                        </div>
+                    </li>
                     <li class="flex border-b py-2">
                         <span class="font-bold w-32">Last Update</span>
                         <span class="text-gray-700">{{ ucwords($company->updated_at) }}</span>
@@ -125,7 +132,8 @@
                             </div>
 
                             <div class="relative">
-                                <label for="new-password" class="block font-medium text-gray-700 mb-2">New Password</label>
+                                <label for="new-password" class="block font-medium text-gray-700 mb-2">New
+                                    Password</label>
                                 <input type="password" id="new-password" name="password" autocomplete="new-password"
                                     required
                                     class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 sm:text-sm">

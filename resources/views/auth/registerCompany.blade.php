@@ -75,7 +75,7 @@
                                 placeholder="Confirm Password" class="w-full p-2 border border-gray-300 rounded-md pr-10">
                             <div class="absolute inset-y-0 right-0 pr-3 pt-5 flex items-center cursor-pointer"
                                 onclick="togglePasswordVisibility('confirm-password', this)">
-                                <i class="fa fa-eye text-gray-600"></i> 
+                                <i class="fa fa-eye text-gray-600"></i>
                             </div>
                             @error('confirm_password')
                                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -103,14 +103,8 @@
                     </div>
                     <div class="mb-4 space-y-2">
                         <label for="domain" class="block text-sm font-medium text-gray-700">Domain</label>
-                        <select id="domain" name="domain" class="w-full p-2 border border-gray-300 rounded-md">
-                            <option value="default">Choose your domain</option>
-                            <option value="marketing" {{ old('domain') == 'marketing' ? 'selected' : '' }}>Marketing
-                            </option>
-                            <option value="programming" {{ old('domain') == 'programming' ? 'selected' : '' }}>Programming
-                            </option>
-                            <option value="design" {{ old('domain') == 'design' ? 'selected' : '' }}>Design</option>
-                        </select>
+                        <input type="text" id="domain" name="domain" placeholder="You can chose more then one domain"
+                            class="w-full p-2 border border-gray-300 rounded-md" value="{{ old('domain') }}">
                         @error('domain')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror

@@ -28,10 +28,18 @@
                                 <h3 class="text-lg text-gray-800 font-bold">{{ ucwords($announce->title) }}</h3>
                                 <p class="text-gray-500">{{ ucwords($announce->company->company_name) }}</p>
                                 <p class="text-gray-600">{{ ucwords($announce->company->address) }}</p>
+
                             </div>
                         </div>
+                        <br>
                         <div class="mt-4">
+                            <span class="font-bold text-gray-800 mr-4">Domain </span><br>
+                            <span
+                                class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-300 cursor-pointer">{{ ucwords($announce->company->domain) }}</span>
+                            <br><br>
+                            <span class="font-bold text-gray-800">Description </span>
                             <p class="text-gray-700">{{ ucwords($announce->description) }}</p>
+                            <br>
                             <a href="{{ route('trainee.dashboard.offre', $announce->id) }}"
                                 class="text-blue-500 hover:text-blue-600 font-bold">View Details</a>
                         </div>
