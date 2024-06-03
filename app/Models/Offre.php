@@ -22,4 +22,7 @@ class Offre extends Model
     public function trainee() {
         return $this->belongsTo(Trainee::class);
     }
+    public function internships(){
+        return $this->hasMany(Internship::class , "offre_id");
+    }
 }

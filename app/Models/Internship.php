@@ -17,4 +17,13 @@ class Internship extends Model
         'company_id',
         'trainee_id'
     ];
+    public function trainee() {
+        return $this->belongsTo(Trainee::class);
+    }
+    public function company() {
+        return $this->belongsTo(Company::class);
+    }
+    public function offre() {
+        return $this->belongsTo(Offre::class);
+    }
 }

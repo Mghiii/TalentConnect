@@ -4,7 +4,7 @@
 
     <div class="flex h-screen">
         <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-company />
+            <x-sidebar-company :company="$company" />
         </div>
         <div class="flex-1 p-8 overflow-y-auto">
             <header class="mb-8">
@@ -75,7 +75,7 @@
                                     Former interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    346</h4>
+                                    {{$internships->count()}}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/former-interns">
@@ -98,7 +98,7 @@
                                     Current interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    10</h4>
+                                    {{$internships->count()}}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/current-interns">

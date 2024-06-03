@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone_number');
             $table->string('domain');
-            $table->string('company_image')->nullable();
+            $table->string('company_image')->default('profile/userImage.png');
             $table->timestamps();
         });
     }

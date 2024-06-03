@@ -23,7 +23,7 @@ class Company extends Model
     public function announces(){
         return $this->hasMany(Announce::class , "company_id");
     }
-    public function getImageAttribute($value){
-        return $value??'profile/userImage.png';
+    public function internships(){
+        return $this->hasMany(Internship::class , "company_id");
     }
 }

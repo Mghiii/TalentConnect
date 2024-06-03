@@ -44,6 +44,9 @@ Route::middleware(['auth', 'role:company'])->group(function () {
     Route::get('/company/dashboard/new-announcement', [CompanyController::class, 'internships'])->name('company.dashboard.internships');
     Route::get('/company/dashboard/inteenship/create/{offre}', [InternshipController::class, 'create'])->name('company.dashboard.internships.create');
     Route::post('/company/dashboard/inteenship/store/{offre}', [InternshipController::class, 'store'])->name('company.dashboard.internships.create.store');
+    Route::get('/company/dashboard/former-interns/edit/{internship}' , [InternshipController::class, 'edit'])->name('company.dashboard.internships.edit');
+    Route::put('/company/dashboard/former-interns/update/{internship}' , [InternshipController::class, 'update'])->name('company.dashboard.internships.update');
+
 
     Route::post('/company/dashboard/announce/store', [AnnonceController::class, 'store'])->name('company.dashboard.internships.store');
     Route::delete('/company/dashboard/announce/delete/{announce}', [AnnonceController::class, 'destroy'])->name('company.announce.delete');
@@ -72,5 +75,8 @@ Route::middleware(['auth', 'role:trainee'])->group(function () {
     Route::get('/trainee/notifications', [TraineeController::class, 'notifications'])->name('trainee.notifications');
     Route::get('/trainee/help-centre', [TraineeController::class, 'help'])->name('trainee.help');
     Route::get('/trainee/profile', [TraineeController::class, 'profile'])->name('trainee.profile');
+    Route::put('/trainee/profile/imageupdate/{trainee}' , [TraineeController::class , 'updateImage'])->name('trainee.profile.image.update');
+    Route::delete('/trainee/profile/destroy/{trainee}' , [TraineeController::class , 'destroyProfile'])->name('trainee.profile.destroy');
+    Route::put('/trainee/profile/update/password/{trainee}' , [TraineeController::class , 'updatePassword'])->name('trainee.profile.update.password');
     Route::get('/trainee/announcement/details', [TraineeController::class, 'details'])->name('trainee.details');
 });

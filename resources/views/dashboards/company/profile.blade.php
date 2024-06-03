@@ -3,11 +3,9 @@
 @section('content')
     <div class="flex h-screen ">
         <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-company />
+            <x-sidebar-company  :company="$company"  />
         </div>
-        @php
-            $company = $companies->firstWhere('email', Auth::user()->email);
-        @endphp
+
 
         <div class="flex-1 p-8 overflow-y-auto">
             <div class="">

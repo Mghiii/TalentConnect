@@ -12,181 +12,33 @@
                           <tr>
                               <th class="px-4 py-3 text-left">Date</th>
                               <th class="px-4 py-3 text-left">Notification</th>
+                              <th class="px-4 py-3 text-left">Company name</th>
                               <th class="px-4 py-3 text-left">Status</th>
-                              <th class="px-4 py-3 text-left">Action</th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-01</td>
-                              <td class="px-4 py-3">Your order #1234 has been shipped.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-green-200 text-green-800 px-2 py-1 rounded-full">Read</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Unread</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-10</td>
-                              <td class="px-4 py-3">Your payment for invoice #5678 is due soon.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
-                          <tr class="border-b">
-                              <td class="px-4 py-3">2023-05-05</td>
-                              <td class="px-4 py-3">Your account password has been changed.</td>
-                              <td class="px-4 py-3">
-                                  <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">Unread</span>
-                              </td>
-                              <td class="px-4 py-3">
-                                  <a href="#" class="text-blue-500 hover:text-blue-700">Mark as Read</a>
-                              </td>
-                          </tr>
+                        @foreach ($offres as $offre )
+                        <tr class="border-b">
+                            <td class="px-4 py-3">{{$offre->offre_date}}</td>
+                            <td class="px-4 py-3">{{$offre->announce->title}}</td>
+                            <td class="px-4 py-3">
+                                {{$offre->announce->company->username}}
+                            </td>
+                            @if ($offre->status == 'accepted')
+                            <td class="px-4 py-3">
+                                <span class="bg-green-200 text-green-800 px-2 py-1 rounded-full">{{$offre->status}}</span>
+                            </td>
+                            @elseif ($offre->status == 'rejected')
+                            <td class="px-4 py-3">
+                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded-full">{{$offre->status}}</span>
+                            </td>
+                            @else
+                            <td class="px-4 py-3">
+                                <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">{{$offre->status}}</span>
+                            </td>
+                            @endif
+                        </tr>
+                        @endforeach
                       </tbody>
                   </table>
               </div>

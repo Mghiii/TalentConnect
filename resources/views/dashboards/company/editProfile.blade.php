@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex h-screen">
         <div class="w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-company />
+            <x-sidebar-company :company="$company" />
         </div>
 
 
@@ -14,7 +14,7 @@
                         class="w-full h-full rounded-tl-lg rounded-tr-lg">
                 </div>
                 <div class="flex flex-col items-center -mt-20">
-                    <img src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg"
+                    <img src="{{ asset('storage/'. $company->company_image) }}"
                         class="w-40 border-4 border-white rounded-full">
                     <div class="flex items-center space-x-2 mt-2">
                         <p class="text-2xl">{{ $company->username }}</p>

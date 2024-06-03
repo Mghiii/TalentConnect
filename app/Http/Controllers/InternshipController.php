@@ -40,7 +40,7 @@ class InternshipController extends Controller
             'trainee_id' => 'required'
         ]);
 
-        
+
 
         Internship::create($validatedData);
         $offre->update(['status' => 'accepted']);
@@ -62,7 +62,8 @@ class InternshipController extends Controller
      */
     public function edit(Internship $internship)
     {
-        //
+
+        return view('dashboards.company.internshipUpdate' , compact('internship'));
     }
 
     /**
@@ -70,8 +71,18 @@ class InternshipController extends Controller
      */
     public function update(Request $request, Internship $internship)
     {
-        //
+        $validation = $request->validate([
+            'certificate' => 'required|mimes:pdf',
+            'comment' => 'required'
+        ]);
+        if ($request->hasFile('certificate')) {
+            $validation['certificate'] = $request->file('certificate')->store('certificates', 'public');
+        }
+        $internship->fill($validation)->save();
+        $internships = Internship::all();
+        return redirect()->route('company.dashboard.internFormer' , compact('internships'));
     }
+
 
     /**
      * Remove the specified resource from storage.

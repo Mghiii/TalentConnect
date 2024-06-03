@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\connectMiddleware;
 use App\Models\Announce;
 use App\Models\Company;
+use App\Models\Internship;
 use App\Models\Offre;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,19 +15,35 @@ class CompanyController extends Controller
 {
 //--------------------------------------------------------
     public function dashboard(){
+
         $company = Company::where('email', auth()->user()->email)->first();
 
         $announces = Announce::where('company_id', $company->id)->get();
 
-    return view('dashboards.company.dashboard', compact('announces'));
+    $offres = collect();
+    foreach ($announces as $announce) {
+        $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
+    }
+    $internships = Internship::where('company_id', $company->id)->get();
+
+    return view('dashboards.company.dashboard', compact('company','announces' , 'offres' , 'internships'));
     }
 //--------------------------------------------------------
     public function currentInterns(){
-        return view('dashboards.company.currentInterns');
+        $company = Company::where('email', auth()->user()->email)->first();
+        $announces = Announce::where('company_id', $company->id)->get();
+
+        $offres = collect();
+        foreach ($announces as $announce) {
+            $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
+        }
+        $internships = Internship::where('company_id', $company->id)->get();
+        return view('dashboards.company.currentInterns' , compact( 'company','announces' , 'offres' , 'internships'));
     }
 //--------------------------------------------------------
     public function help(){
-        return view('dashboards.company.help');
+        $company = Company::where('email', auth()->user()->email)->first();
+        return view('dashboards.company.help' , compact('company'));
     }
 //--------------------------------------------------------
 public function internApp(){
@@ -37,27 +54,41 @@ public function internApp(){
     foreach ($announces as $announce) {
         $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
     }
+    $internships = Internship::where('company_id', $company->id)->get();
 
-    return view('dashboards.company.internApp' , compact('announces' , 'offres'));
+    return view('dashboards.company.internApp' , compact('company','announces' , 'offres' , 'internships'));
 }
 
 //--------------------------------------------------------
     public function internFormer(){
-        return view('dashboards.company.internFormer');
+
+        $company = Company::where('email', auth()->user()->email)->first();
+        $announces = Announce::where('company_id', $company->id)->get();
+
+        $offres = collect();
+        foreach ($announces as $announce) {
+            $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
+        }
+
+        $internships = Internship::where('company_id', $company->id)->get();
+
+        return view('dashboards.company.internFormer' ,compact('company','announces' , 'offres' , 'internships'));
     }
 //--------------------------------------------------------
     public function internships(){
-        $companies = Company::all();
-        return view('dashboards.company.internships' , compact('companies'));
+        $company = Company::where('email', auth()->user()->email)->first();
+        return view('dashboards.company.internships' , compact('company'));
     }
 //--------------------------------------------------------
     public function notifications(){
-        return view('dashboards.company.notifications');
+        $company = Company::where('email', auth()->user()->email)->first();
+        $announces = Announce::where('company_id', $company->id)->get();
+        return view('dashboards.company.notifications' , compact('company','announces'));
     }
 //--------------------------------------------------------
     public function profile(){
-        $companies = Company::all();
-        return view('dashboards.company.profile' , compact('companies'));
+        $company = Company::where('email', auth()->user()->email)->first();
+        return view('dashboards.company.profile' , compact('company'));
         }
 
     public function editProfile($id){
@@ -86,7 +117,7 @@ public function internApp(){
             $company->address = $request->input('address');
             $company->save();
 
-            return redirect()->route('company.dashboard.profile')->with('success', 'Profile updated successfully.');
+            return redirect()->route('company.dashboard.profile');
         }
 
 
@@ -95,7 +126,7 @@ public function internApp(){
                 $company->delete();
                 User::where('email', $company->email)->delete();
                 Announce::where('company_id', $company->id)->delete();
-
+                Internship::where('company_id', $company->id)->delete();
                 Auth::logout();
             }
 
@@ -107,7 +138,7 @@ public function internApp(){
             ]);
 
             if($request->hasFile('company_image')){
-             $formField['company_image'] = $request->file('company_image')->store('profile','public');
+             $formField['company_image'] = $request->file('company_image')->store('profile/company_image','public');
             }
 
             $company->fill($formField)->save();

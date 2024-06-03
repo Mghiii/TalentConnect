@@ -36,9 +36,14 @@
         </div>
         <div>
             @php
-                $trainee = $trainees->firstWhere('email', Auth::user()->email);
-                $offre = $offres->firstWhere('trainee_id', $trainee->id)->firstWhere('announce_id', $announce->id);
-            @endphp
+    $trainee = $trainees->firstWhere('email', Auth::user()->email);
+    if ($trainee) {
+        $offre = $offres->firstWhere('trainee_id', $trainee->id);
+        if ($offre) {
+            $offre = $offre->firstWhere('announce_id', $announce->id);
+        }
+    }
+@endphp
 
             @if (!$offre || !$offre->status)
             <form action="{{ route('trainee.dashboard.offre.create') }}" method="POST" enctype="multipart/form-data">
