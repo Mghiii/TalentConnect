@@ -75,19 +75,34 @@ class TraineeController extends Controller
 
         return redirect()->route('trainee.profile');
     }
-    public function updatePassword(Request $request, Trainee $trainee)
-        {
-            $validatedData = $request->validate([
-                'current_password' => 'required|string',
-                'password' => 'required|string|min:8|regex:/^(?=.*[A-Z])(?=.*[0-9]).+$/',
-                'confirm_password' => 'required|same:password',
-            ]);
 
-            if (Hash::check($request->current_password, $trainee->password)) {
-                $trainee->password = Hash::make($validatedData['password']);
-                $trainee->save();
-                return redirect()->route('trainee.profile');
-            } else {
-                return redirect()->route('trainee.dashboard');
-            }}
+    public function updatePassword(Request $request, Trainee $trainee)
+{
+    // Validate input
+    $validatedData = $request->validate([
+        'current_password' => 'required|string',
+        'password' => 'required|string|min:8|regex:/^(?=.*[A-Z])(?=.*[0-9]).+$/',
+        'confirm_password' => 'required|same:password',
+    ]);
+
+    if (!Hash::check($request->current_password, $trainee->password)) {
+        return redirect()->route('trainee.dashboard');
+    }
+
+    $user = User::where('email', $trainee->email)->first();
+
+    if (!$user) {
+        return redirect()->route('trainee.dashboard');
+    }
+
+    $hashedPassword = Hash::make($validatedData['password']);
+    $trainee->password = $hashedPassword;
+    $user->password = $hashedPassword;
+
+    $trainee->save();
+    $user->save();
+
+    return redirect()->route('trainee.profile');
+}
+
 }

@@ -147,20 +147,33 @@ public function internApp(){
         }
 
         public function updatePassword(Request $request, Company $company)
-        {
-            $validatedData = $request->validate([
-                'current_password' => 'required|string',
-                'password' => 'required|string|min:8|regex:/^(?=.*[A-Z])(?=.*[0-9]).+$/',
-                'confirm_password' => 'required|same:password',
-            ]);
+{
+    $validatedData = $request->validate([
+        'current_password' => 'required|string',
+        'password' => 'required|string|min:8|regex:/^(?=.*[A-Z])(?=.*[0-9]).+$/',
+        'confirm_password' => 'required|same:password',
+    ]);
 
-            if (Hash::check($request->current_password, $company->password)) {
-                $company->password = Hash::make($validatedData['password']);
-                $company->save();
-                return redirect()->route('company.dashboard.profile');
-            } else {
-                return redirect()->route('company.dashboard');
-            }}
+    if (!Hash::check($request->current_password, $company->password)) {
+        return redirect()->route('company.dashboard');
+    }
+
+    $user = User::where('email', $company->email)->first();
+
+    if (!$user) {
+        return redirect()->route('company.dashboard');
+    }
+
+    $hashedPassword = Hash::make($validatedData['password']);
+    $company->password = $hashedPassword;
+    $user->password = $hashedPassword;
+
+    $company->save();
+    $user->save();
+
+    return redirect()->route('company.dashboard.profile');
+}
+
 
 //--------------------------------------------------------
 }
