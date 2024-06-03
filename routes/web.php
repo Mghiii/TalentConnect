@@ -76,7 +76,11 @@ Route::middleware(['auth', 'role:trainee'])->group(function () {
     Route::get('/trainee/help-centre', [TraineeController::class, 'help'])->name('trainee.help');
     Route::get('/trainee/profile', [TraineeController::class, 'profile'])->name('trainee.profile');
     Route::put('/trainee/profile/imageupdate/{trainee}' , [TraineeController::class , 'updateImage'])->name('trainee.profile.image.update');
-    Route::delete('/trainee/profile/destroy/{trainee}' , [TraineeController::class , 'destroyProfile'])->name('trainee.profile.destroy');
     Route::put('/trainee/profile/update/password/{trainee}' , [TraineeController::class , 'updatePassword'])->name('trainee.profile.update.password');
     Route::get('/trainee/announcement/details', [TraineeController::class, 'details'])->name('trainee.details');
+
+    Route::get('/trainee/profile/edit/{id}', [TraineeController::class, 'editProfile'])->name('trainee.editProfile');
+    Route::put('profile/update/{trainee}', [TraineeController::class, 'updateProfile'])->name('trainee.updateProfile');
+    Route::delete('/trainee/profile/destroy/{trainee}' , [TraineeController::class , 'destroyProfile'])->name('trainee.profile.destroy');
+
 });

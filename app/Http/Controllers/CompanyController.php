@@ -91,10 +91,11 @@ public function internApp(){
         return view('dashboards.company.profile' , compact('company'));
         }
 
-    public function editProfile($id){
+    public function editProfile($id)
+    {
         $company = Company::findOrFail($id);
         return view('dashboards.company.editProfile', compact('company'));
-        }
+    }
 
     public function updateProfile(Request $request, $id)
         {

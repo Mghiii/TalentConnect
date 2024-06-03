@@ -37,7 +37,7 @@
                             @endif
 
                             <td class="px-4 py-3">
-                                <a href="{{route('company.dashboard.internFormer')}}" class="text-blue-500 hover:text-blue-700">show more</a>
+                                <a href="{{route('company.dashboard.currentInterns')}}" class="text-blue-500 hover:text-blue-700">show more</a>
                             </td>
                         </tr>
                         @endforeach

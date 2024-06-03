@@ -75,7 +75,7 @@
                                     Former interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    {{$internships->count()}}</h4>
+                                    {{ $internships->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/former-interns">
@@ -98,7 +98,7 @@
                                     Current interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    {{$internships->count()}}</h4>
+                                    {{ $internships->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/current-interns">
@@ -137,41 +137,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ( $offres as $offre )
+                                        @foreach ($offres as $offre)
                                             <tr
                                                 class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
                                                 <td
                                                     class="border px-4 py-2 text-center font-normal hover:font-semibold text-gray-600 hover:text-gray-800">
-                                                    {{$offre->trainee->first_name}} {{$offre->trainee->last_name}}
+                                                    {{ $offre->trainee->first_name }} {{ $offre->trainee->last_name }}
                                                 </td>
-                                                <td class="border px-4 py-2 text-center"><a href="{{ asset('storage/'. $offre->CV) }}" download>PDF</a></td>
-                                                <td class="border px-4 py-2 text-center"><a href="{{ asset('storage/'. $offre->motivation_lettre) }}" download> PDF-file(txt)</a></td>
-                                                <td class="border px-4 py-2 text-center">announcement that they come from
+                                                <td class="border px-4 py-2 text-center">
+                                                    <a href="{{ asset('storage/' . $offre->CV) }}" download>PDF</a>
                                                 </td>
-                                                    @if ($offre->status == 'accepted')
-                                                    <td class="bg-green-500 ">
+                                                <td class="border px-4 py-2 text-center">
+                                                    <a href="{{ asset('storage/' . $offre->motivation_lettre) }}"
+                                                        download>PDF-file(txt)</a>
                                                 </td>
+                                                <td class="border px-4 py-2 text-center">
+                                                    {{ $offre->announce->title }}
+                                                </td>
+                                                @if ($offre->status == 'accepted')
+                                                    <td class="text-center">
+                                                        <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                                                    </td>
                                                 @elseif ($offre->status == 'rejected')
-                                                <td class="bg-red-500 "> </td>
+                                                    <td class="text-center">
+                                                        <i class="fas fa-times-circle text-red-500 text-xl"></i>
+                                                    </td>
                                                 @else
-                                                <td class="border px-4 py-2 flex justify-center">
-                                                    <a  href="{{route('company.dashboard.internships.create' ,$offre->id )}}" class="text-green-500 hover:text-green-700 mr-2">
-                                                        <i class="fas fa-check-circle"></i>
-                                                    </a>
-                                                    <form action="{{route('company.dashboard.internApp.rejected' , $offre->id)}}" method="post">
-                                                        @csrf
-                                                        @method("PUT")
-                                                        <button type="submit" class="text-red-500 hover:text-red-700">
-                                                        <i class="fas fa-times-circle"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
+                                                    <td class="border px-4 py-2 flex justify-center items-center space-x-2">
+                                                        <a href="{{ route('company.dashboard.internships.create', $offre->id) }}"
+                                                            class="text-green-500 hover:text-green-700">
+                                                            <i class="fas fa-check-circle text-xl"></i>
+                                                        </a>
+                                                        <form
+                                                            action="{{ route('company.dashboard.internApp.rejected', $offre->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="text-red-500 hover:text-red-700">
+                                                                <i class="fas fa-times-circle text-xl"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
                                                 @endif
-
-
                                             </tr>
-
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

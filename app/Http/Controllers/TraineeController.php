@@ -109,4 +109,28 @@ class TraineeController extends Controller
     return redirect()->route('trainee.profile');
 }
 
+    public function editProfile($id)
+    {
+        $trainee = Trainee::findOrFail($id);
+        return view('dashboards.trainee.editProfile', compact('trainee'));
+    }
+
+
+    public function updateProfile(Request $request, Trainee $trainee)
+    {
+        $validatedData = $request->validate([
+            'username' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:trainees,email,' . $trainee->id,
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:15',
+            'domain' => 'required|string|max:255',
+        ]);
+
+        $trainee->update($validatedData);
+
+        return redirect()->route('trainee.profile')->with('success', 'Profile updated successfully.');
+    }
+
 }

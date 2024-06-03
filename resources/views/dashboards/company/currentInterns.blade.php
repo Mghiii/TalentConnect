@@ -4,7 +4,7 @@
 
     <div class="flex h-screen">
         <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-           
+
             <x-sidebar-company :company="$company" />
         </div>
 
@@ -97,7 +97,7 @@
                                 <p
                                     class="block antialiased font-sans text-sm leading-normal font-semibold text-blue-gray-600">
                                     Current interns</p>
-                                    @php
+                                @php
                                     $internships = $internships->filter(function ($internship) {
                                         return is_null($internship->certificate);
                                     });
@@ -138,37 +138,39 @@
                                             <th class="px-4 py-2">Full name</th>
                                             <th class="px-4 py-2">Email</th>
                                             <th class="px-4 py-2">Phone number</th>
+                                            <th class="px-4 py-2">Training date</th>
                                             <th class="px-4 py-2">Atestation</th>
-                                            <th class="px-4 py-2">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($internships as $internship )
-                                        @if ($internship->certificate)
 
-                                        @else
-                                            <tr
-                                                class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
-                                                <td
-                                                    class="border px-4 py-2 text-center font-normal hover:font-semibold text-gray-600 hover:text-gray-800">
-                                                    {{$internship->trainee->first_name}} {{$internship->trainee->last_name}}
-                                                </td>
-                                                <td class="border px-4 py-2 text-center">{{$internship->trainee->email}}</td>
-                                                <td class="border px-4 py-2 text-center">{{$internship->trainee->phone_number}}</td>
-                                                <td class="border px-4 py-2 text-center">
-                                                    <a href="#"
-                                                        class="text-indigo-500 hover:text-indigo-700 font-bold">
-                                                        {{$internship->trainee->address}}
-                                                    </a>
-                                                </td>
-                                                <td class="border px-4 py-2 flex justify-center">
-
-                                                    <a href="{{ route('company.dashboard.internships.edit', $internship->id) }}" class="text-green-500 hover:text-green-700 mr-2">                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                        @foreach ($internships as $internship)
+                                            @if ($internship->certificate)
+                                            @else
+                                                <tr
+                                                    class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
+                                                    <td
+                                                        class="border px-4 py-2 text-center font-normal hover:font-semibold text-gray-600 hover:text-gray-800">
+                                                        {{ $internship->trainee->first_name }}
+                                                        {{ $internship->trainee->last_name }}
+                                                    </td>
+                                                    <td class="border px-4 py-2 text-center">
+                                                        {{ $internship->trainee->email }}</td>
+                                                    <td class="border px-4 py-2 text-center">
+                                                        {{ $internship->trainee->phone_number }}</td>
+                                                    <td class="border px-4 py-2 text-center">
+                                                        {{ $internship->start_date }} | {{ $internship->end_date }}
+                                                    </td>
+                                                    <td class="px-4 py-2 flex justify-center">
+                                                        <a href="{{ route('company.dashboard.internships.edit', $internship->id) }}"
+                                                            class="text-green-500 hover:text-green-700 mr-2"> <i
+                                                                class="fas fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             @endif
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
