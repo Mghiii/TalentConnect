@@ -148,15 +148,13 @@
                                                 <td class="border px-4 py-2 text-center"><a href="{{ asset('storage/'. $offre->motivation_lettre) }}" download> PDF-file(txt)</a></td>
                                                 <td class="border px-4 py-2 text-center">announcement that they come from
                                                 </td>
-                                                <td class="border px-4 py-2 flex justify-center">
                                                     @if ($offre->status == 'accepted')
-                                                    <h1 class="bg-green-500 border px-4 py-2 text-center">accepted</h1>
+                                                    <td class="bg-green-500 ">
+                                                </td>
                                                 @elseif ($offre->status == 'rejected')
-                                                    <h1 class="bg-red-500 border px-4 py-2 text-center">rejected</h1>
+                                                <td class="bg-red-500 "> </td>
                                                 @else
-                                                    <a href="/company/dashboard/trainee-profile/{{ $offre->id }}" class="text-blue-500 hover:text-blue-700 mr-2">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
+                                                <td class="border px-4 py-2 flex justify-center">
                                                     <a  href="{{route('company.dashboard.internships.create' ,$offre->id )}}" class="text-green-500 hover:text-green-700 mr-2">
                                                         <i class="fas fa-check-circle"></i>
                                                     </a>
@@ -167,9 +165,10 @@
                                                         <i class="fas fa-times-circle"></i>
                                                     </button>
                                                 </form>
+                                            </td>
                                                 @endif
 
-                                                </td>
+
                                             </tr>
 
                                         @endforeach

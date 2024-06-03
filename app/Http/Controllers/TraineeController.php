@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Hash;
 class TraineeController extends Controller
 {
     public function dashboard(){
+        $trainee = Trainee::where('email', auth()->user()->email)->first();
         $announces = Announce::all();
 
-        return view('dashboards.trainee.dashboard' , compact('announces'));
+        return view('dashboards.trainee.dashboard' , compact('trainee','announces'));
     }
     public function search(){
-        return view('dashboards.trainee.search');
+        $trainee = Trainee::where('email', auth()->user()->email)->first();
+        return view('dashboards.trainee.search' , compact('trainee'));
     }
     public function progress(){
         $trainee = Trainee::where('email', auth()->user()->email)->first();
@@ -28,27 +30,29 @@ class TraineeController extends Controller
         } else {
             $internships = collect();
         }
-        return view('dashboards.trainee.progress' , compact('internships'));
+        return view('dashboards.trainee.progress' , compact( 'trainee','internships'));
     }
     public function notifications(){
         $trainee = Trainee::where('email', auth()->user()->email)->first();
 
     if ($trainee) {
         $offres = Offre::where('trainee_id', $trainee->id)->get();
-        return view('dashboards.trainee.notifications', compact('offres'));
+        return view('dashboards.trainee.notifications', compact('trainee', 'offres'));
     } else {
         return view('dashboards.trainee.notifications', ['offres' => collect()]);
     };
     }
     public function help(){
-        return view('dashboards.trainee.help');
+        $trainee = Trainee::where('email', auth()->user()->email)->first();
+        return view('dashboards.trainee.help' , compact('trainee'));
     }
     public function profile(){
-        $trainees = Trainee::all();
-        return view('dashboards.trainee.profile' , compact('trainees'));
+        $trainee = Trainee::where('email', auth()->user()->email)->first();
+        return view('dashboards.trainee.profile' , compact('trainee'));
     }
     public function details(){
-        return view('dashboards.trainee.details');
+        $trainee = Trainee::where('email', auth()->user()->email)->first();
+        return view('dashboards.trainee.details' , compact('trainee'));
     }
 
     public function destroyProfile(Trainee $trainee){

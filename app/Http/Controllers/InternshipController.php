@@ -62,8 +62,9 @@ class InternshipController extends Controller
      */
     public function edit(Internship $internship)
     {
+        $company = Company::where('email', auth()->user()->email)->first();
 
-        return view('dashboards.company.internshipUpdate' , compact('internship'));
+        return view('dashboards.company.internshipUpdate' , compact('company','internship'));
     }
 
     /**

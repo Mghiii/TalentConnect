@@ -24,9 +24,9 @@ class OffreController extends Controller
      */
     public function create(Request $request, Announce $announce)
     {
-        $trainees = Trainee::all();
+        $trainee = Trainee::where('email', auth()->user()->email)->first();
         $offres = Offre::all();
-        return view('dashboards.trainee.announce', compact( 'announce' ,'trainees' , 'offres'));
+        return view('dashboards.trainee.announce', compact( 'announce' ,'trainee' , 'offres'));
     }
 
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('motivation_lettre');
             $table->unsignedBigInteger('trainee_id');
             $table->unsignedBigInteger('announce_id');
-            $table->string('status')->default('');
+            $table->string('status')->default('offre_send');
             $table->timestamps();
             $table->foreign('trainee_id')->references('id')->on('trainees')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('announce_id')->references('id')->on('announces')->cascadeOnUpdate()->cascadeOnDelete();

@@ -5,7 +5,7 @@
     <div class="flex h-screen">
         <!-- Sidebar Section -->
         <div class="w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-trainee />
+            <x-sidebar-trainee :trainee="$trainee" />
         </div>
 
         <div class="flex-1 p-10">
@@ -36,16 +36,13 @@
         </div>
         <div>
             @php
-    $trainee = $trainees->firstWhere('email', Auth::user()->email);
-    if ($trainee) {
         $offre = $offres->firstWhere('trainee_id', $trainee->id);
         if ($offre) {
             $offre = $offre->firstWhere('announce_id', $announce->id);
         }
-    }
 @endphp
 
-            @if (!$offre || !$offre->status)
+            @if (!$offre )
             <form action="{{ route('trainee.dashboard.offre.create') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">

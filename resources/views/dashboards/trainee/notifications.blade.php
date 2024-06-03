@@ -3,7 +3,7 @@
   @section('content')
       <div class="flex">
           <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-              <x-sidebar-trainee />
+            <x-sidebar-trainee :trainee="$trainee" />
           </div>
           <div class="flex-1 p-8 overflow-y-auto">
               <div class="bg-white rounded-lg shadow-md overflow-y-auto">

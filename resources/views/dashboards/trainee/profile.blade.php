@@ -3,11 +3,8 @@
   @section('content')
       <div class="flex h-screen ">
           <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-              <x-sidebar-trainee />
+            <x-sidebar-trainee :trainee="$trainee" />
           </div>
-          @php
-            $trainee = $trainees->firstWhere('email', Auth::user()->email);
-        @endphp
           <div class="flex-1 p-8 overflow-y-auto">
               <div class="">
                   <div class="w-full h-[250px]">
