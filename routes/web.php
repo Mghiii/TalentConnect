@@ -71,6 +71,7 @@ Route::middleware(['auth', 'role:trainee'])->group(function () {
     Route::get('/trainee/dashboard/offre/{announce}', [OffreController::class, 'create'])->name('trainee.dashboard.offre');
     Route::post('/trainee/dashboard/offre', [OffreController::class, 'store'])->name('trainee.dashboard.offre.create');
     Route::get('/trainee/internships/search', [TraineeController::class, 'search'])->name('trainee.search');
+    Route::get('/trainee/internships/findSearch' , [TraineeController::class , 'findSearch'])->name('trainee.findSearch');
     Route::get('/trainee/internships/progress', [TraineeController::class, 'progress'])->name('trainee.progress');
     Route::get('/trainee/notifications', [TraineeController::class, 'notifications'])->name('trainee.notifications');
     Route::get('/trainee/help-centre', [TraineeController::class, 'help'])->name('trainee.help');

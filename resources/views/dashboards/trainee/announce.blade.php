@@ -13,7 +13,7 @@
         <div class="flex-1 p-10 flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6">
             <!-- Announcement Details -->
             <div class="w-full lg:w-1/2 bg-white shadow-2xl rounded-lg p-8">
-                <div class="mb-8 flex items-center">
+                <div class="mb-4 flex items-center">
                     @if ($announce->company)
                         <div class="flex items-center mb-8">
                             <div class="mr-4">
