@@ -24,9 +24,14 @@ class CompanyController extends Controller
     foreach ($announces as $announce) {
         $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
     }
-    $internships = Internship::where('company_id', $company->id)->get();
+    $internships1 = Internship::where('company_id', $company->id)
+    ->whereNull('certificate')
+    ->get();
+    $internships2 = Internship::where('company_id', $company->id)
+    ->whereNotNull('certificate')
+    ->get();
 
-    return view('dashboards.company.dashboard', compact('company','announces' , 'offres' , 'internships'));
+    return view('dashboards.company.dashboard', compact('company','announces' , 'offres' , 'internships1' , 'internships2'));
     }
 //--------------------------------------------------------
     public function currentInterns(){
@@ -37,8 +42,13 @@ class CompanyController extends Controller
         foreach ($announces as $announce) {
             $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
         }
-        $internships = Internship::where('company_id', $company->id)->get();
-        return view('dashboards.company.currentInterns' , compact( 'company','announces' , 'offres' , 'internships'));
+    $internships = Internship::where('company_id', $company->id)
+    ->whereNull('certificate')
+    ->get();
+    $internships2 = Internship::where('company_id', $company->id)
+    ->whereNotNull('certificate')
+    ->get();
+        return view('dashboards.company.currentInterns' , compact( 'company','announces' , 'offres' , 'internships' , 'internships2'));
     }
 //--------------------------------------------------------
     public function help(){
@@ -54,9 +64,14 @@ public function internApp(){
     foreach ($announces as $announce) {
         $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
     }
-    $internships = Internship::where('company_id', $company->id)->get();
+    $internships = Internship::where('company_id', $company->id)
+    ->whereNull('certificate')
+    ->get();
+    $internships2 = Internship::where('company_id', $company->id)
+    ->whereNotNull('certificate')
+    ->get();
 
-    return view('dashboards.company.internApp' , compact('company','announces' , 'offres' , 'internships'));
+    return view('dashboards.company.internApp' , compact('company','announces' , 'offres' , 'internships' , 'internships2'));
 }
 
 //--------------------------------------------------------
@@ -70,9 +85,13 @@ public function internApp(){
             $offres = $offres->merge(Offre::where('announce_id', $announce->id)->get());
         }
 
-        $internships = Internship::where('company_id', $company->id)->get();
-
-        return view('dashboards.company.internFormer' ,compact('company','announces' , 'offres' , 'internships'));
+        $internships2 = Internship::where('company_id', $company->id)
+            ->whereNull('certificate')
+            ->get();
+        $internships = Internship::where('company_id', $company->id)
+            ->whereNotNull('certificate')
+            ->get();
+        return view('dashboards.company.internFormer' ,compact('company','announces' , 'offres' , 'internships' , 'internships2'));
     }
 //--------------------------------------------------------
     public function internships(){
