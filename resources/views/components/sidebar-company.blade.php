@@ -1,3 +1,4 @@
+@props(['company'])
 <div class="w-16 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-60 z-10">
     <a href="/company/dashboard"
         class="sidebar-item text-gray-700 hover:text-gray-900 transition-colors {{ request()->is('company/dashboard') ? 'active' : '' }}">
@@ -28,7 +29,7 @@
     <a href="/company/dashboard/profile"
         class="sidebar-item text-gray-700 hover:text-gray-900 transition-colors {{ request()->is('company/dashboard/profile') ? 'active' : '' }}">
         <img alt="image profile"
-            src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg"
+            src="{{ asset('storage/'. $company->company_image) }}"
             class="relative inline-block h-8 w-12 cursor-pointer rounded-full object-cover object-center"
             data-popover-target="profile-menu" />
         <span class="hidden md:block font-bold">Profile</span>

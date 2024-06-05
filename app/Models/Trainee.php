@@ -17,6 +17,13 @@ class Trainee extends Model
         'password',
         'address',
         'phone_number',
+        'trainee_image',
         'domain'
     ];
+    public function offres(){
+        return $this->hasMany(Offre::class , "trainee_id");
+    }
+    public function internships(){
+        return $this->hasMany(Internship::class , "trainee_id");
+    }
 }

@@ -4,7 +4,7 @@
 
     <div class="flex h-screen">
         <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-company />
+            <x-sidebar-company :company="$company" />
         </div>
         <div class="flex-1 p-8 overflow-y-auto">
             <header class="mb-8">
@@ -28,7 +28,7 @@
                                     Announcements</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    15</h4>
+                                    {{ $announces->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard" onclick="smoothScroll(event)">
@@ -51,7 +51,7 @@
                                     Intern applicants</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    230</h4>
+                                    {{ $offres->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/intern-applicants">
@@ -75,7 +75,7 @@
                                     Former interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    346</h4>
+                                    {{ $internships->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/former-interns">
@@ -98,7 +98,7 @@
                                     Current interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    10</h4>
+                                    {{ $internships->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/current-interns">
@@ -137,31 +137,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for ($i = 1; $i <= 10; $i++)
+                                        @foreach ($offres as $offre)
                                             <tr
                                                 class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
                                                 <td
                                                     class="border px-4 py-2 text-center font-normal hover:font-semibold text-gray-600 hover:text-gray-800">
-                                                    trainee {{ $i }}
+                                                    {{ $offre->trainee->first_name }} {{ $offre->trainee->last_name }}
                                                 </td>
-                                                <td class="border px-4 py-2 text-center">PDF</td>
-                                                <td class="border px-4 py-2 text-center">PDF-file(txt)</td>
-                                                <td class="border px-4 py-2 text-center">announcement that they come from
+                                                <td class="border px-4 py-2 text-center">
+                                                    <a href="{{ asset('storage/' . $offre->CV) }}" download>PDF</a>
                                                 </td>
-                                                <td class="border px-4 py-2 flex justify-center">
-                                                    <a href="/company/dashboard/trainee-profile/:id"
-                                                        class="text-blue-500 hover:text-blue-700 mr-2">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <a href="#" class="text-green-500 hover:text-green-700 mr-2">
-                                                        <i class="fas fa-check-circle"></i>
-                                                    </a>
-                                                    <a href="#" class="text-red-500 hover:text-red-700">
-                                                        <i class="fas fa-times-circle"></i>
-                                                    </a>
+                                                <td class="border px-4 py-2 text-center">
+                                                    <a href="{{ asset('storage/' . $offre->motivation_lettre) }}"
+                                                        download>PDF-file(txt)</a>
                                                 </td>
+                                                <td class="border px-4 py-2 text-center">
+                                                    {{ $offre->announce->title }}
+                                                </td>
+                                                @if ($offre->status == 'accepted')
+                                                    <td class="text-center">
+                                                        <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                                                    </td>
+                                                @elseif ($offre->status == 'rejected')
+                                                    <td class="text-center">
+                                                        <i class="fas fa-times-circle text-red-500 text-xl"></i>
+                                                    </td>
+                                                @else
+                                                    <td class="border px-4 py-2 flex justify-center items-center space-x-2">
+                                                        <a href="{{ route('company.dashboard.internships.create', $offre->id) }}"
+                                                            class="text-green-500 hover:text-green-700">
+                                                            <i class="fas fa-check-circle text-xl"></i>
+                                                        </a>
+                                                        <form
+                                                            action="{{ route('company.dashboard.internApp.rejected', $offre->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="text-red-500 hover:text-red-700">
+                                                                <i class="fas fa-times-circle text-xl"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                @endif
                                             </tr>
-                                        @endfor
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

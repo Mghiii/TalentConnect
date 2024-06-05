@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex h-screen bg-gray-50 ">
         <div class="w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-company />
+            <x-sidebar-company :company="$company"  />
         </div>
         <div class="flex-1 p-2 overflow-y-auto">
             <header class="mb-8">
@@ -77,7 +77,8 @@
                                     <span class="text-red-500">{{$message}}</span>
                                 @enderror
                             </div>
-                            <input type="hidden" value="{{Auth::user()->id}}" name="company_id">
+                            
+                            <input type="hidden" value="{{$company->id}}" name="company_id">
                             <button type="submit"
                                 class=" mb-6 w-full flex justify-center bg-gray-400 hover:bg-gray-500 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-100">Submit</button>
 

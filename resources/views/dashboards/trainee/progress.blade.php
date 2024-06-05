@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex h-screen">
         <div class="w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-trainee />
+            <x-sidebar-trainee :trainee="$trainee" />
         </div>
         <div class="flex-1 p-8 overflow-y-auto">
             <header class="mb-8">
@@ -17,13 +17,15 @@
                         <h2 class="text-lg font-medium text-gray-900">Training Progress</h2>
                     </div>
                     <div class="p-6 space-y-4">
+                        @foreach ( $internships as $internship )
+                        @if ($internship->certificate)
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-book"></i>
+                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-check"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">Web Development Fundamentals</h3>
-                                <p class="text-gray-600">In Progress</p>
+                                <h3 class="text-lg font-medium text-gray-900">{{$internship->company->username}}</h3>
+                                <p class="text-gray-600">{{$internship->offre->announce->title}}</p>
                             </div>
                             <div class="ml-auto">
                                 <button
@@ -32,51 +34,23 @@
                                 </button>
                             </div>
                         </div>
+
+                        @else
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-check"></i>
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-book"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">Database Management</h3>
-                                <p class="text-gray-600">Completed</p>
+                                <h3 class="text-lg font-medium text-gray-900">{{$internship->company->username}}</h3>
+                                <p class="text-gray-600">In Progress</p>
+                            </div>
+                            <div class="ml-auto">
                             </div>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">Advanced JavaScript</h3>
-                                <p class="text-gray-600">Completed</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">SQL Fundamentals</h3>
-                                <p class="text-gray-600">Completed</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">React.js Basics</h3>
-                                <p class="text-gray-600">Completed</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">Laravel Fundamentals</h3>
-                                <p class="text-gray-600">Completed</p>
-                            </div>
-                        </div>
+
+                        @endif
+                        @endforeach
+
                     </div>
                 </div>
             </div>

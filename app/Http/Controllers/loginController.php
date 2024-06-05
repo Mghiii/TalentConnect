@@ -14,19 +14,19 @@ class loginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)  
+    public function login(Request $request)
     {
         $email = $request->email;
         $password = $request->password;
         $user = User::where('email', $email)->first();
         $company = Company::where('email', $email)->first();
         $trainee = Trainee::where('email', $email)->first();
-    
+
         $credentials = ['email' => $email , 'password' => $password];
-    
+
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-    
+
             if($user && $user->role === 'admin'){
                 return "admin";
             } elseif($company && $user->role === 'company'){

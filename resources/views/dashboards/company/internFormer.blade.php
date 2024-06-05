@@ -4,7 +4,7 @@
 
     <div class="flex h-screen">
         <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-company />
+            <x-sidebar-company  :company="$company" />
         </div>
         <div class="flex-1 p-8 overflow-y-auto">
             <header class="mb-8">
@@ -28,11 +28,12 @@
                                     Announcements</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    15</h4>
+                                    {{ $announces->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
-                                <a href="#Announcements" onclick="smoothScroll(event)">
-                                    <p class="block antialiased font-sans text-base leading-relaxed text-blue-gray-600">
+                                <a href="/company/dashboard" >
+                                    <p
+                                        class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                         <strong class="text-green-500">Announcements</strong>&nbsp;Management
                                     </p>
                                 </a>
@@ -50,7 +51,7 @@
                                     Intern applicants</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    230</h4>
+                                    {{ $offres->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/intern-applicants">
@@ -69,12 +70,17 @@
 
                             </div>
                             <div class="p-4 text-right">
+                                @php
+                                 $internships1 = $internships->filter(function ($internship) {
+                                        return !is_null($internship->certificate);
+                                    });
+                            @endphp
                                 <p
                                     class="block antialiased font-sans text-sm leading-normal font-semibold text-blue-gray-600">
                                     Former interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    346</h4>
+                                    {{ count($internships1) }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/former-interns">
@@ -92,12 +98,17 @@
                                 <i class="fas fa-hourglass-half text-2xl"></i>
                             </div>
                             <div class="p-4 text-right">
+                                @php
+                                    $Internships2 = $internships->filter(function ($internship) {
+                                        return !is_null($internship->certificate);
+                                                        });
+                                @endphp
                                 <p
                                     class="block antialiased font-sans text-sm leading-normal font-semibold text-blue-gray-600">
                                     Current interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    10</h4>
+                                    {{ count($internships) }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/current-interns">
@@ -136,30 +147,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for ($i = 1; $i <= 10; $i++)
-                                            <tr
-                                                class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
-                                                <td
-                                                    class="border px-4 py-2 text-center font-normal hover:font-semibold text-gray-600 hover:text-gray-800">
-                                                    Trainee name {{ $i }}
-                                                </td>
-                                                <td class="border px-4 py-2 text-center">email@email.com</td>
-                                                <td class="border px-4 py-2 text-center">0689841509</td>
-                                                <td class="border px-4 py-2 text-center">PDF/docs</td>
-                                                <td class="border px-4 py-2 flex justify-center">
-                                                    <a href="/company/dashboard/announcements/:id"
-                                                        class="text-blue-500 hover:text-blue-700 mr-2">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <a href="#" class="text-green-500 hover:text-green-700 mr-2">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <a href="#" class="text-red-500 hover:text-red-700">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endfor
+                                        @foreach ($internships as $internship )
+                                        @if ($internship->certificate)
+                                        <tr
+                                        class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
+                                        <td
+                                            class="border px-4 py-2 text-center font-normal hover:font-semibold text-gray-600 hover:text-gray-800">
+                                            {{$internship->trainee->first_name}} {{$internship->trainee->last_name}}
+                                        </td>
+                                        <td class="border px-4 py-2 text-center">{{$internship->trainee->email}}</td>
+                                        <td class="border px-4 py-2 text-center">{{$internship->trainee->phone_number}}</td>
+                                        <td class="border px-4 py-2 text-center"><a href="{{ asset('storage/'. $internship->certificate) }}" download>PDF</a></td>
+                                        <td class="border px-4 py-2 flex justify-center">
+
+
+                                            <h1>fffff</h1>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
