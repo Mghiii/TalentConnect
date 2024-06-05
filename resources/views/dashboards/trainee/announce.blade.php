@@ -1,6 +1,6 @@
 @extends('dashboards.layout')
 
-@section('title', 'Trainee | Dashboard')
+@section('title', 'Trainee | Announcement')
 
 @section('content')
     <div class="flex h-screen">

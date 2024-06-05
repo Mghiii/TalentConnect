@@ -1,5 +1,5 @@
 @extends('dashboards.layout')
-@section('title', 'Company | Dashboard')
+@section('title', 'Company | Edit Announce')
 @section('content')
     <style>
         .one {

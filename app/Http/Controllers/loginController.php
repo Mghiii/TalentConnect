@@ -8,42 +8,43 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class loginController extends Controller
+class LoginController extends Controller
 {
-    public function show(){
+    public function show()
+    {
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
-        $email = $request->email;
-        $password = $request->password;
-        $user = User::where('email', $email)->first();
-        $company = Company::where('email', $email)->first();
-        $trainee = Trainee::where('email', $email)->first();
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        $credentials = ['email' => $email , 'password' => $password];
-
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            if($user && $user->role === 'admin'){
-                return "admin";
-            } elseif($company && $user->role === 'company'){
-                return redirect()->route('company.dashboard' ,$company->id );
-            } elseif($trainee && $user->role === 'trainee'){
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role === 'company') {
+                $company = Company::where('email', $user->email)->first();
+                return redirect()->route('company.dashboard', $company->id);
+            } elseif ($user->role === 'trainee') {
+                $trainee = Trainee::where('email', $user->email)->first();
                 return redirect()->route('trainee.dashboard', $trainee->id);
-            } else {
-                redirect()->route('login.show');
             }
-        } else {
-            return redirect()->route('login.show')->withErrors([
-                'email' => 'Email or password is incorrect'
-            ]);
         }
+
+        return redirect()->route('login.show')->withErrors([
+            'email' => 'Email or password is incorrect',
+        ]);
     }
-    public function logout()  {
-        session()->flush();
+
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('login.show');
     }

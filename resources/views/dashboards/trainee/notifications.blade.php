@@ -1,5 +1,5 @@
   @extends('dashboards.layout')
-  @section('title', 'Trainee | Dashboard')
+  @section('title', 'Trainee | Notification')
   @section('content')
       <div class="flex">
           <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">

@@ -1,5 +1,5 @@
 @extends('dashboards.layout')
-@section('title', 'Company | Dashboard')
+@section('title', 'Company | Add Trainee')
 @section('content')
     @php
         $company = $companies->firstWhere('email', Auth::user()->email);
