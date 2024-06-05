@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\AnnonceController;
-use App\Http\Controllers\ApplyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterCompanyController;
 use App\Http\Controllers\RegisterTraineeController;
 use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HelpController;
+use App\Http\Controllers\HelpRequestController;
 use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OffreController;
@@ -63,6 +64,7 @@ Route::middleware(['auth', 'role:company'])->group(function () {
     Route::get('/company/dashboard/profile', [CompanyController::class, 'profile'])->name('company.dashboard.profile');
     Route::get('/company/dashboard/help-centre', [CompanyController::class, 'help'])->name('company.dashboard.help');
     Route::get('/company/dashboard/notifications', [CompanyController::class, 'notifications'])->name('company.dashboard.notifications');
+    Route::post('/send-help-request', [HelpRequestController::class, 'sendHelpRequest'])->name('send.help.request');
 });
 
 // Trainee Routes

@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex h-screen">
         <div class=" w-16 border-r border-gray-100 px-4 py-8 flex flex-col items-center justify-center space-y-12 pb-40">
-            <x-sidebar-company :company="$company"/>
+            <x-sidebar-company :company="$company" />
         </div>
         <div class="flex-1 p-8 overflow-y-auto">
             <header class="">
@@ -97,24 +97,25 @@
                 </div>
                 <div class="w-lg px-4 lg:w-1/2 xl:w-5/12 md:pt-16">
                     <div class="relative p-8 bg-white rounded-lg shadow-lg sm:p-12">
-                        <h1 class="text-lg text-gray-700 underline font-semibold">Your request will be addressed promptly. Thank you for your patience.</h1>
+                        <h1 class="text-lg text-gray-700 underline font-semibold">Your request will be addressed promptly.
+                            Thank you for your patience.</h1>
                         <br>
-                        <form>
+                        <form action="{{ route('send.help.request') }}" method="POST">
                             @csrf
                             <div class="mb-6">
-                                <input type="text" placeholder="Your Name"
+                                <input type="text" name="name" placeholder="Your Name"
                                     class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-gray-800 w-full rounded border py-3 px-[14px] text-base outline-none" />
                             </div>
                             <div class="mb-6">
-                                <input type="email" placeholder="Your Email"
+                                <input type="email" name="email" placeholder="Your Email"
                                     class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-gray-800 w-full rounded border py-3 px-[14px] text-base outline-none" />
                             </div>
                             <div class="mb-6">
-                                <input type="text" placeholder="Your Phone"
+                                <input type="text" name="phone" placeholder="Your Phone"
                                     class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-gray-800 w-full rounded border py-3 px-[14px] text-base outline-none" />
                             </div>
                             <div class="mb-6">
-                                <textarea rows="6" placeholder="Your Message"
+                                <textarea name="message" rows="6" placeholder="Your Message"
                                     class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-gray-800 w-full resize-none rounded border py-3 px-[14px] text-base outline-none"></textarea>
                             </div>
                             <div>
