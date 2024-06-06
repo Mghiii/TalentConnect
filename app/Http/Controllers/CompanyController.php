@@ -145,8 +145,6 @@ public function internApp(){
             if (Auth::check()) {
                 $company->delete();
                 User::where('email', $company->email)->delete();
-                Announce::where('company_id', $company->id)->delete();
-                Internship::where('company_id', $company->id)->delete();
                 Auth::logout();
             }
 
