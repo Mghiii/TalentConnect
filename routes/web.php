@@ -88,5 +88,12 @@ Route::middleware(['auth', 'role:trainee'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');}
+    Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('admin/trainees', [AdminController::class, 'indexTrainees'])->name('admin.trainees');
+    Route::get('admin/companies', [AdminController::class, 'indexCompanies'])->name('admin.companies');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::delete('admin/companies/{id}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
+    Route::get('admin/companies/{id}/announcements', [AdminController::class, 'showCompanyAnnouncements'])->name('admin.companies.announcements');
+    Route::delete('trainees/{id}', [AdminController::class, 'destroyTrainee'])->name('trainees.destroy');
+    Route::get('trainees/{id}/offers', [AdminController::class, 'showTraineeOffers'])->name('trainees.offers');}
 );
