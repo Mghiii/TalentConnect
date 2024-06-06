@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announce;
+use App\Models\Company;
 use App\Models\Internship;
 use App\Models\Offre;
 use App\Models\Trainee;
@@ -132,5 +133,17 @@ class TraineeController extends Controller
 
         return redirect()->route('trainee.profile')->with('success', 'Profile updated successfully.');
     }
+    public function findSearch(Request $request){
+        $search = strtolower(trim($request->input('search')));
+
+        $companies = Company::where('domain', $search)->pluck('id');
+
+        $announces = Announce::whereIn('company_id', $companies)->get();
+
+        $trainee = Trainee::where('email', auth()->user()->email)->first();
+        return view('dashboards.trainee.findSearch' , compact('trainee' ,'announces' ));
+    }
+
+
 
 }

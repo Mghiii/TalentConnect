@@ -70,17 +70,13 @@
 
                             </div>
                             <div class="p-4 text-right">
-                                @php
-                                 $internships1 = $internships->filter(function ($internship) {
-                                        return !is_null($internship->certificate);
-                                    });
-                            @endphp
+
                                 <p
                                     class="block antialiased font-sans text-sm leading-normal font-semibold text-blue-gray-600">
                                     Former interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    {{ count($internships1) }}</h4>
+                                    {{ count($internships) }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/former-interns">
@@ -98,17 +94,12 @@
                                 <i class="fas fa-hourglass-half text-2xl"></i>
                             </div>
                             <div class="p-4 text-right">
-                                @php
-                                    $Internships2 = $internships->filter(function ($internship) {
-                                        return !is_null($internship->certificate);
-                                                        });
-                                @endphp
                                 <p
                                     class="block antialiased font-sans text-sm leading-normal font-semibold text-blue-gray-600">
                                     Current interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    {{ count($internships) }}</h4>
+                                    {{ count($internships2) }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/current-interns">

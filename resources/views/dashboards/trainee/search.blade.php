@@ -24,14 +24,15 @@
                     </div>
                     <!-- Search Bar -->
                     <div class="md:w-[584px] mx-auto mt-7 flex w-[92%] items-center rounded-full border hover:shadow-md">
-                        <div class="pl-5">
-                            <i class="fas fa-search mr-2 text-2xl text-gray-500"></i>
-                        </div>
-                        <input type="text" class="w-full bg-transparent rounded-full py-[14px] pl-4 outline-none" />
-                        <div class="pr-5">
-                            <i class="fas fa-paper-plane text-xl ml-2 text-gray-500"></i>
-                        </div>
+                        <form action="{{ route('trainee.findSearch') }}" method="GET" class="flex w-full">
+                            @csrf
+                            <input type="text" class="w-full bg-transparent rounded-full py-[14px] pl-4 outline-none" name="search" placeholder="Search..." />
+                            <button type="submit" class="flex items-center justify-center pl-5 pr-4">
+                                <i class="fas fa-search mr-2 text-2xl text-gray-500" aria-label="Search"></i>
+                            </button>
+                        </form>
                     </div>
+
                 </div>
             </section>
         </div>

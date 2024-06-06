@@ -75,7 +75,7 @@
                                     Former interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    {{ $internships->count() }}</h4>
+                                    {{ $internships2->count() }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/former-interns">

@@ -77,7 +77,7 @@
                                     Former interns</p>
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                    {{ count($internships) }}</h4>
+                                    {{ count($internships2) }}</h4>
                             </div>
                             <div class="border-t border-blue-gray-50 p-4">
                                 <a href="/company/dashboard/former-interns">
@@ -97,11 +97,7 @@
                                 <p
                                     class="block antialiased font-sans text-sm leading-normal font-semibold text-blue-gray-600">
                                     Current interns</p>
-                                @php
-                                    $internships = $internships->filter(function ($internship) {
-                                        return is_null($internship->certificate);
-                                    });
-                                @endphp
+                                
                                 <h4
                                     class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
                                     {{ count($internships) }}</h4>
@@ -145,8 +141,7 @@
                                     <tbody>
 
                                         @foreach ($internships as $internship)
-                                            @if ($internship->certificate)
-                                            @else
+
                                                 <tr
                                                     class="hover:bg-gray-200 font-normal hover:font-semibold text-gray-600 hover:text-gray-800 cursor-pointer">
                                                     <td
@@ -168,7 +163,6 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            @endif
                                         @endforeach
 
                                     </tbody>
