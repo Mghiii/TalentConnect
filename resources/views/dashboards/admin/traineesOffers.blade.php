@@ -31,13 +31,19 @@
                             <td class="px-4 py-2">{{ $offre->status }}</td>
                             <td class="px-4 py-2">{{ $offre->announce_id }}</td>
                             <td class="px-4 py-2">{{ $offre->announce->company->company_name }}</td>
-                            <td class="px-4 py-2">
-                                <form action="{{route('admin.trainee.offre.delete' , $offre->id)}}" method="POST" class="inline-block">
+                            <td class="px-4 py-2 flex space-x-2">
+                                <a href="{{ route('admin.trainee.offre.edite', $offre->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                                    Edit
+                                </a>
+                                <form action="{{ route('admin.trainee.offre.delete', $offre->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="return confirm('Are you sure you want to delete this offer?')">
+                                        Delete
+                                    </button>
                                 </form>
                             </td>
+
                         </tr>
                     @endforeach
                 </tbody>

@@ -30,7 +30,7 @@
                             <td class="px-4 py-2">{{ $announce->benefits }}</td>
                             <td class="px-4 py-2">{{ $announce->contact }}</td>
                             <td class="px-4 py-2">
-                                <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 inline-block">Edit</a>
+                                <a href="{{route('admin.companies.editeAnnounce' , $announce->id)}}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 inline-block">Edit</a>
                                 <form action="{{route('admin.companies.announcements.delete' , $announce->id)}}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')

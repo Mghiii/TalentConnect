@@ -46,17 +46,9 @@
                         <div class="mb-4">
                             <label for="start_date" class="block text-gray-700 text-sm font-bold mb-2">Start Date</label>
                             <div class="relative">
-                                <input type="text" id="start_date" name="start_date"
+                                <input type="date"  name="start_date"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500 datepicker"
                                     placeholder="Select start date">
-                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                </div>
                             </div>
                             @error('start_date')
                                 <div class="text-red-500 text-xs italic mt-2">{{ $message }}</div>
@@ -65,17 +57,9 @@
                         <div class="mb-4">
                             <label for="end_date" class="block text-gray-700 text-sm font-bold mb-2">End Date</label>
                             <div class="relative">
-                                <input type="text" id="end_date" name="end_date"
+                                <input type="date" name="end_date"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:ring-blue-500 datepicker"
                                     placeholder="Select end date">
-                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                </div>
                             </div>
                             @error('end_date')
                                 <div class="text-red-500 text-xs italic mt-2">{{ $message }}</div>
@@ -109,21 +93,4 @@
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 
-    <script>
-        var startDatePicker = new Pikaday({
-            field: document.getElementById('start_date'),
-            format: 'YYYY-MM-DD',
-            onSelect: function() {
-                this.setInputValue();
-            }
-        });
-
-        var endDatePicker = new Pikaday({
-            field: document.getElementById('end_date'),
-            format: 'YYYY-MM-DD',
-            onSelect: function() {
-                this.setInputValue();
-            }
-        });
-    </script>
 @endsection

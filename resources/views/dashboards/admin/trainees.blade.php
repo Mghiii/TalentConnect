@@ -39,13 +39,19 @@
                         <td class="px-4 py-2">
                             <a href="{{ route('trainees.offers', $trainee->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block">View</a>
                             </td>
-                            <td class="px-4 py-2">
-                            <form action="{{ route('trainees.destroy', $trainee->id) }}" method="POST" class="inline-block">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
-                            </form>
-                        </td>
+                            <td class="px-4 py-2 flex space-x-2">
+                                <a href="{{ route('admin.trainee.edite', $trainee->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                                    Edit
+                                </a>
+                                <form action="{{ route('trainees.destroy', $trainee->id) }}" method="POST" class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+
                     </tr>
                 @endforeach
             </tbody>

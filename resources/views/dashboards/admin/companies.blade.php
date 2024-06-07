@@ -20,8 +20,8 @@
                         <th class="px-4 py-2">Username</th>
                         <th class="px-4 py-2">Address</th>
                         <th class="px-4 py-2">Domain</th>
-                        <th class="px-4 py-2">Company Image</th>
                         <th class="px-4 py-2">Announces</th>
+                        <th class="px-4 py-2">Interships</th>
                         <th class="px-4 py-2">Actions</th>
                     </tr>
                 </thead>
@@ -36,16 +36,21 @@
                             <td class="px-4 py-2">{{ $company->username }}</td>
                             <td class="px-4 py-2">{{ $company->address }}</td>
                             <td class="px-4 py-2">{{ $company->domain }}</td>
-                            <td class="px-4 py-2"><img src="{{ $company->company_image }}" alt="Company Image" class="w-12 h-auto"></td>
                             <td class="px-4 py-2">
                                 <a href="{{ route('admin.companies.announcements', $company->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block">View</a>
-                                </td>
-                                <td class="px-4 py-2">
-                                <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
-                                </form>
+                            </td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('admin.companies.internships', $company->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block">View</a>
+                            </td>
+                            <td class="px-4 py-2">
+                                <div class="flex">
+                                    <a href="{{route('admin.companies.editCompany' , $company->id)}}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 inline-block">Edit</a>
+                                    <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST" class="inline-block ml-2">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

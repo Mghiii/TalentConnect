@@ -90,13 +90,28 @@ Route::middleware(['auth', 'role:trainee'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/trainees', [AdminController::class, 'indexTrainees'])->name('admin.trainees');
+    Route::get('admim/trainee/edite/{trainee}' , [AdminController::class , 'editTrainee'])->name('admin.trainee.edite');
+    Route::put('admin/trainee/update/{trainee}' , [ AdminController::class , 'updateTrainee'])->name('admin.trainee.update');
     Route::get('admin/companies', [AdminController::class, 'indexCompanies'])->name('admin.companies');
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('admin/companies/edite/{company}', [AdminController::class, 'editCompany'])->name('admin.companies.editCompany');
+    Route::put('admin/companies/update/{company}', [AdminController::class, 'updateCompany'])->name('admin.companies.updateCompany');
     Route::delete('admin/companies/{company}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
     Route::get('admin/companies/{id}/announcements', [AdminController::class, 'showCompanyAnnouncements'])->name('admin.companies.announcements');
+    Route::get('admin/companies/announcements/edite/{announce}', [AdminController::class, 'editeAnnounce'])->name('admin.companies.editeAnnounce');
+    Route::put('admin/companies/announcements/upadte/{announce}', [AdminController::class, 'updateAnnounce'])->name('admin.companies.updateAnnounce');
     Route::delete('admin/companies/announcement/delete/{announce}' , [AdminController::class , 'destroyAnnounce'])->name('admin.companies.announcements.delete');
     Route::delete('trainees/{trainee}', [AdminController::class, 'destroyTrainee'])->name('trainees.destroy');
     Route::get('trainees/{id}/offers', [AdminController::class, 'showTraineeOffers'])->name('trainees.offers');
+    Route::get('admim/trainee/offre/edite/{offre}' , [AdminController::class , 'editOffre'])->name('admin.trainee.offre.edite');
+    Route::put('admim/trainee/offre/update/{offre}' , [AdminController::class , 'updateOffre'])->name('admin.trainee.offre.update');
     Route::delete('admin/trainee/offre/delete/{offre}' , [AdminController::class , 'destroyOffre'])->name('admin.trainee.offre.delete');
+    Route::get('admin/companies/{company}/internships', [AdminController::class, 'showCompanyInternships'])->name('admin.companies.internships');
+    Route::get('admin/companies/internships/edite/{internship}' , [AdminController::class , 'editeInternship'])->name('admin.companies.editeInternship');
+    Route::put('admin/companies/internship/update/{internship}' , [ AdminController::class , 'updateinternship'])->name('admin.companies.updateinternship');
+    Route::delete('admin/companies/internships/delete/{internship}' , [AdminController::class , 'destroyInternships'])->name('admin.companies.internships.delete');
+
+
+
 }
 );
