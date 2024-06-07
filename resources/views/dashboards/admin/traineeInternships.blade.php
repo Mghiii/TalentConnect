@@ -1,11 +1,11 @@
 @extends('dashboards.admin.layout')
-@section('title', 'Admin | Company Interships')
+@section('title', 'Admin | trainee Interships')
 @section('content')
 <div class="container mx-auto p-4 h-screen">
-    <h1 class="text-3xl font-bold mb-4">interships for {{ $company->company_name }}</h1>
-    <a href="{{ route('admin.companies') }}" class="mb-3 inline-block bg-blue-500 text-white px-4 py-2 rounded">Back to Companies</a>
+    <h1 class="text-3xl font-bold mb-4">interships for {{ $trainee->trainee_username }}</h1>
+    <a href="{{ route('admin.trainees') }}" class="mb-3 inline-block bg-blue-500 text-white px-4 py-2 rounded">Back to Trainees</a>
     @if ($internships->isEmpty())
-        <p class="text-gray-700">No interships available for this company.</p>
+        <p class="text-gray-700">No interships available for this trainee.</p>
     @else
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <table class="table-auto w-full">
@@ -38,8 +38,8 @@
                         </td>
                         <td class="px-4 py-2">{{ $internship->comment }}</td>
                         <td class="px-4 py-2">
-                            <a href="{{ route('admin.companies.editInternship', $internship->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 inline-block">Edit</a>
-                            <form action="{{ route('admin.companies.internships.delete', $internship->id) }}" method="POST" class="inline-block">
+                            <a href="{{ route('admin.trainee.editInternship', $internship->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 inline-block">Edit</a>
+                            <form action="{{ route('admin.trainee.internships.delete', $internship->id) }}" method="POST" class="inline-block">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>

@@ -13,14 +13,14 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function dashboard(){
-        
+
         $totalTrainees = Trainee::count();
         $totalCompanies = Company::count();
         $totalAnnouncements = Announce::count();
         $totalInternships = Internship::count();
         $totalOffers = Offre::count();
 
-        
+
         $users = User::all();
 
         return view("dashboards.admin.dashboard", compact('totalTrainees', 'totalCompanies', 'totalAnnouncements', 'totalInternships', 'totalOffers', 'users'));
@@ -91,7 +91,7 @@ class AdminController extends Controller
 
     public function showCompanyInternships(Company $company) {
         $internships = $company->internships;
-        return view('dashboards.admin.companiesInternships', compact('company', 'internships'));
+        return view('dashboards.admin.companiesInterships', compact('company', 'internships'));
     }
 
     public function destroyInternship(Internship $internship) {
@@ -101,7 +101,7 @@ class AdminController extends Controller
     }
 
     public function editCompany(Company $company) {
-        return view('dashboards.admin.companiesEdit', compact('company'));
+        return view('dashboards.admin.companiesedit', compact('company'));
     }
 
     public function updateCompany(Request $request, Company $company) {
@@ -109,7 +109,7 @@ class AdminController extends Controller
             'company_name' => 'required|string|max:255',
             'contact_name' => 'required|string|max:255',
             'phone_number' => 'required|numeric',
-            'username' => 'required|string|max:255',
+            'email' => 'required|email',
             'address' => 'required|string|max:255',
             'domain' => 'required|string|max:255',
         ]);
@@ -134,7 +134,7 @@ class AdminController extends Controller
         $announce->fill($request->all())->save();
         $companyId = $announce->company_id;
 
-        return redirect()->route('admin.companies.announcements', ['company' => $companyId]);
+        return redirect()->route('admin.companies.announcements', ['id' => $companyId]);
     }
 
     public function editInternship(Internship $internship) {
@@ -149,7 +149,7 @@ class AdminController extends Controller
         if ($request->hasFile('certificate')) {
             $validation['certificate'] = $request->file('certificate')->store('certificates', 'public');
         }
-        $internship->fill($validation)->save();
+        $internship->fill($request->all())->save();
         $companyId = $internship->company_id;
         return redirect()->route('admin.companies.internships', ['company' => $companyId]);
     }
@@ -163,10 +163,12 @@ class AdminController extends Controller
             'username' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
+            'email' => 'required|email',
             'address' => 'required|string|max:255',
             'phone_number' => 'required|numeric',
             'domain' => 'required|string|max:255',
         ]);
+
         $trainee->update($validatedData);
 
         return to_route('admin.trainees');
@@ -187,4 +189,42 @@ class AdminController extends Controller
         $traineeId = $offre->trainee_id;
         return to_route('trainees.offers', ['id' => $traineeId]);
     }
+
+    public function showTraineeInternships(Trainee $trainee) {
+        $internships = $trainee->internships;
+        return view('dashboards.admin.traineeInternships', compact('trainee', 'internships'));
+    }
+
+    public function destroyTraineeInternship(Internship $internship) {
+        $trainee = $internship->trainee;
+        $internship->delete();
+        return redirect()->route('admin.companies.internships', compact('trainee'));
+    }
+
+    public function traineeEditInternship(Internship $internship) {
+        return view('dashboards.admin.traineeEditInternship', compact('internship'));
+    }
+
+    public function traineeUpdateInternship(Request $request, Internship $internship) {
+        $validation = $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+
+        if ($request->hasFile('certificate')) {
+            $validation['certificate'] = $request->file('certificate')->store('certificates', 'public');
+        }
+
+        $internship->fill($request->all())->save();
+
+        $traineeId = $internship->trainee_id;
+
+        return redirect()->route('admin.trainee.internships', ['trainee' => $traineeId]);
+    }
+    public function traineeDestroyInternship(Internship $internship) {
+        $trainee = $internship->trainee;
+        $internship->delete();
+        return redirect()->route('admin.companies.internships', compact('trainee'));
+    }
+
 }

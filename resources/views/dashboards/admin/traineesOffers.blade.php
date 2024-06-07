@@ -32,7 +32,7 @@
                             <td class="px-4 py-2">{{ $offre->announce_id }}</td>
                             <td class="px-4 py-2">{{ $offre->announce->company->company_name }}</td>
                             <td class="px-4 py-2 flex space-x-2">
-                                <a href="{{ route('admin.trainee.offre.edite', $offre->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                                <a href="{{ route('admin.trainee.offre.edit', $offre->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
                                     Edit
                                 </a>
                                 <form action="{{ route('admin.trainee.offre.delete', $offre->id) }}" method="POST" class="inline-block">

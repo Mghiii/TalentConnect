@@ -13,7 +13,7 @@
                   </div>
                   <div class="flex flex-col items-center -mt-20">
                       <img src="{{ asset('storage/' . $trainee->trainee_image) }}"
-                          class="w-40 border-4 border-white rounded-full">
+                      class="w-40 h-40 border-4 border-white rounded-full object-cover">
                       <div class="flex items-center space-x-2 mt-2">
                           <p class="text-2xl">{{ ucwords($trainee->username) }}</p>
                       </div>
