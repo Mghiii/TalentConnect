@@ -78,7 +78,7 @@ class TraineeController extends Controller
 
         $trainee->fill($formField)->save();
 
-        return redirect()->route('trainee.profile');
+        return redirect()->back();
     }
 
     public function updatePassword(Request $request, Trainee $trainee)

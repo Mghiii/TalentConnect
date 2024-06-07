@@ -92,10 +92,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/trainees', [AdminController::class, 'indexTrainees'])->name('admin.trainees');
     Route::get('admim/trainee/edit/{trainee}' , [AdminController::class , 'editTrainee'])->name('admin.trainee.edit');
     Route::put('admin/trainee/update/{trainee}' , [ AdminController::class , 'updateTrainee'])->name('admin.trainee.update');
+    Route::put('/trainee/profile/imageupdate/{trainee}' , [TraineeController::class , 'updateImage'])->name('trainee.profile.image.update');
     Route::get('admin/companies', [AdminController::class, 'indexCompanies'])->name('admin.companies');
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/companies/edit/{company}', [AdminController::class, 'editCompany'])->name('admin.companies.editCompany');
     Route::put('admin/companies/update/{company}', [AdminController::class, 'updateCompany'])->name('admin.companies.updateCompany');
+    Route::put('/company/profile/image/update/{company}' , [CompanyController::class , 'updateImage'])->name('company.updateImage');
     Route::delete('admin/companies/{company}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
     Route::get('admin/companies/{id}/announcements', [AdminController::class, 'showCompanyAnnouncements'])->name('admin.companies.announcements');
     Route::get('admin/companies/announcements/edit/{announce}', [AdminController::class, 'editAnnounce'])->name('admin.companies.editAnnounce');

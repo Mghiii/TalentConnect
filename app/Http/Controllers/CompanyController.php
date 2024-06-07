@@ -161,8 +161,8 @@ public function internApp(){
 
             $company->fill($formField)->save();
 
-            return redirect()->route('company.dashboard.profile');
-        }
+            return redirect()->back();
+            }
 
         public function updatePassword(Request $request, Company $company)
 {

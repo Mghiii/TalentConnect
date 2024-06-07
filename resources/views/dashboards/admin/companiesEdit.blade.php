@@ -13,6 +13,23 @@
             <div class="flex flex-col items-center -mt-20">
                 <img src="{{ asset('storage/' . $company->company_image) }}" class="w-40 h-40 border-4 border-white rounded-full object-cover">
             </div>
+            <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
+                <div class="flex items-center space-x-4 mt-2">
+
+                    <form action="{{ route('company.updateImage', $company->id) }}" method="POST"
+                        enctype="multipart/form-data" id="imageForm" class="flex items-center">
+                        @csrf
+                        @method('PUT')
+                        <label for="file-upload"
+                            class="flex items-center cursor-pointer bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm transition duration-100">
+                            <i class="fas fa-camera mt-1 pr-1"></i>
+                            <span>Update</span>
+                            <input id="file-upload" name="company_image" type="file" class="sr-only"
+                                onchange="document.getElementById('imageForm').submit()">
+                        </label>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="bg-white rounded-lg shadow-xl p-8">
             <h4 class="text-xl text-gray-900 font-bold mb-6">Edit Company Profile</h4>
