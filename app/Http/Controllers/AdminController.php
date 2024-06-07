@@ -13,16 +13,42 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function dashboard(){
-        return view("dashboards.admin.dashboard");
+        
+        $totalTrainees = Trainee::count();
+        $totalCompanies = Company::count();
+        $totalAnnouncements = Announce::count();
+        $totalInternships = Internship::count();
+        $totalOffers = Offre::count();
+
+        
+        $users = User::all();
+
+        return view("dashboards.admin.dashboard", compact('totalTrainees', 'totalCompanies', 'totalAnnouncements', 'totalInternships', 'totalOffers', 'users'));
     }
+
+
     public function indexTrainees() {
         $trainees = Trainee::all();
-        return view('dashboards.admin.trainees', compact('trainees'));
+        $totalTrainees = Trainee::count();
+        $totalCompanies = Company::count();
+        $totalAnnouncements = Announce::count();
+        $totalInternships = Internship::count();
+        $totalOffers = Offre::count();
+        $users = User::all();
+
+        return view('dashboards.admin.trainees', compact('trainees', 'totalTrainees', 'totalCompanies', 'totalAnnouncements', 'totalInternships', 'totalOffers', 'users'));
     }
+
 
     public function indexCompanies() {
         $companies = Company::all();
-        return view('dashboards.admin.companies', compact('companies'));
+        $totalTrainees = Trainee::count();
+        $totalCompanies = Company::count();
+        $totalAnnouncements = Announce::count();
+        $totalInternships = Internship::count();
+        $totalOffers = Offre::count();
+        $users = User::all();
+        return view('dashboards.admin.companies', compact('companies','totalTrainees', 'totalCompanies', 'totalAnnouncements', 'totalInternships', 'totalOffers', 'users'));
     }
 
     public function destroyCompany(Company $company) {
@@ -32,7 +58,6 @@ class AdminController extends Controller
         return redirect()->route('admin.companies');
     }
 
-
     public function showCompanyAnnouncements($id) {
         $company = Company::findOrFail($id);
         $announces = $company->announces;
@@ -40,51 +65,46 @@ class AdminController extends Controller
         return view('dashboards.admin.companiesAnnouncements', compact('company', 'announces'));
     }
 
-    public function destroyTrainee(Trainee $trainee)
-    {
+    public function destroyTrainee(Trainee $trainee) {
         $trainee->delete();
         User::where('email', $trainee->email)->delete();
 
         return redirect()->route('admin.trainees');
     }
 
-
-    public function showTraineeOffers($id)
-    {
+    public function showTraineeOffers($id) {
         $trainee = Trainee::with('offres.announce.company')->findOrFail($id);
         return view('dashboards.admin.traineesOffers', compact('trainee'));
     }
 
-    public function destroyAnnounce(Announce $announce)
-    {
+    public function destroyAnnounce(Announce $announce) {
         $companyId = $announce->company_id;
         $announce->delete();
-        return redirect()->route('admin.companies.announcements' , ['id' => $companyId]);
+        return redirect()->route('admin.companies.announcements', ['id' => $companyId]);
     }
-    public function destroyOffre(Offre $offre)
-    {
+
+    public function destroyOffre(Offre $offre) {
         $traineeId = $offre->trainee_id;
         $offre->delete();
-        return redirect()->route('trainees.offers' , ['id' => $traineeId]);
+        return redirect()->route('trainees.offers', ['id' => $traineeId]);
     }
 
     public function showCompanyInternships(Company $company) {
         $internships = $company->internships;
-        return view('dashboards.admin.companiesInterships', compact('company', 'internships'));
+        return view('dashboards.admin.companiesInternships', compact('company', 'internships'));
     }
 
-    public function destroyInternships(Internship $internship)
-    {
+    public function destroyInternship(Internship $internship) {
         $company = $internship->company;
         $internship->delete();
-        return redirect()->route('admin.companies.internships' , compact('company'));
+        return redirect()->route('admin.companies.internships', compact('company'));
     }
 
-    public function editCompany(Company $company){
-        return view('dashboards.admin.companiesEdite' , compact('company'));
+    public function editCompany(Company $company) {
+        return view('dashboards.admin.companiesEdit', compact('company'));
     }
 
-    public function updateCompany(Request $request ,Company $company){
+    public function updateCompany(Request $request, Company $company) {
         $validatedData = $request->validate([
             'company_name' => 'required|string|max:255',
             'contact_name' => 'required|string|max:255',
@@ -98,10 +118,11 @@ class AdminController extends Controller
         return to_route('admin.companies');
     }
 
-    public function editeAnnounce(Announce $announce){
-        return view('dashboards.admin.companiesEditeAnnouncement' , compact('announce'));
+    public function editAnnounce(Announce $announce) {
+        return view('dashboards.admin.companiesEditAnnouncement', compact('announce'));
     }
-    public function updateAnnounce(Request $request, Announce $announce){
+
+    public function updateAnnounce(Request $request, Announce $announce) {
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -116,11 +137,12 @@ class AdminController extends Controller
         return redirect()->route('admin.companies.announcements', ['company' => $companyId]);
     }
 
-    public function editeInternship(Internship $internship){
-        return view('dashboards.admin.companiesEditeInternship' , compact('internship'));
+    public function editInternship(Internship $internship) {
+        return view('dashboards.admin.companiesEditInternship', compact('internship'));
     }
-    public function updateInternship(Request $request ,Internship $internship){
-        $validation =$request->validate([
+
+    public function updateInternship(Request $request, Internship $internship) {
+        $validation = $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
@@ -132,11 +154,11 @@ class AdminController extends Controller
         return redirect()->route('admin.companies.internships', ['company' => $companyId]);
     }
 
-    public function editTrainee(Trainee $trainee){
-        return view('dashboards.admin.traineeEdite' , compact('trainee'));
+    public function editTrainee(Trainee $trainee) {
+        return view('dashboards.admin.traineeEdit', compact('trainee'));
     }
 
-    public function updateTrainee(Request $request , Trainee $trainee){
+    public function updateTrainee(Request $request, Trainee $trainee) {
         $validatedData = $request->validate([
             'username' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
@@ -150,11 +172,11 @@ class AdminController extends Controller
         return to_route('admin.trainees');
     }
 
-    public function editOffre(Offre $offre){
-        return view('dashboards.admin.traineesOffreEdite' , compact('offre'));
+    public function editOffre(Offre $offre) {
+        return view('dashboards.admin.traineesOffreEdit', compact('offre'));
     }
 
-    public function updateOffre(Request $request , Offre $offre){
+    public function updateOffre(Request $request, Offre $offre) {
         $validatedData = $request->validate([
             'CV' => 'required|mimes:pdf',
             'motivation_lettre' => 'required|mimes:pdf',
@@ -163,7 +185,6 @@ class AdminController extends Controller
         $validatedData['motivation_lettre'] = $request->file('motivation_lettre')->store('motivation_letters', 'public');
         $offre->update($validatedData);
         $traineeId = $offre->trainee_id;
-        return to_route('trainees.offers' ,['id' => $traineeId]);
+        return to_route('trainees.offers', ['id' => $traineeId]);
     }
-
 }
