@@ -134,7 +134,7 @@
                                             <th class="px-4 py-2">Email</th>
                                             <th class="px-4 py-2">Phone number</th>
                                             <th class="px-4 py-2">Atestation</th>
-                                            <th class="px-4 py-2">Actions</th>
+                                            <th class="px-4 py-2">Comment</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -149,11 +149,7 @@
                                         <td class="border px-4 py-2 text-center">{{$internship->trainee->email}}</td>
                                         <td class="border px-4 py-2 text-center">{{$internship->trainee->phone_number}}</td>
                                         <td class="border px-4 py-2 text-center"><a href="{{ asset('storage/'. $internship->certificate) }}" download>PDF</a></td>
-                                        <td class="border px-4 py-2 flex justify-center">
-
-
-                                            <h1>fffff</h1>
-                                        </td>
+                                        <td class="border px-4 py-2 text-center">{{$internship->comment}}</td>
                                     </tr>
                                     @endif
                                         @endforeach
