@@ -11,7 +11,7 @@
                       <thead class="bg-gray-200">
                           <tr>
                               <th class="px-4 py-3 text-left">Date</th>
-                              <th class="px-4 py-3 text-left">Notification</th>
+                              <th class="px-4 py-3 text-left">Announce title</th>
                               <th class="px-4 py-3 text-left">Company name</th>
                               <th class="px-4 py-3 text-left">Status</th>
                           </tr>

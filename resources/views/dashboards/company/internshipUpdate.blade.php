@@ -22,6 +22,9 @@
             background-color: rgba(255, 255, 255, 0.448);
             z-index: -1;
         }
+        .radio-label {
+            transition: all 0.3s ease;
+        }
     </style>
 
     <div class="flex h-screen ">
@@ -55,14 +58,33 @@
                             @enderror
                         </div>
 
-                        <div>
+                        {{-- <div>
                             <label for="comment" class="block text-gray-700 font-bold mb-2">Comment:</label>
                             <textarea name="comment" id="comment" rows="5"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 resize-none h-24"></textarea>
                             @error('comment')
                                 <span class="text-red-400 text-sm">{{ $message }}</span>
                             @enderror
+                        </div> --}}
+                        <div class="flex space-x-4 p-4">
+                            <label for="comment" class="block text-gray-700 font-bold mb-2">Comment:</label>
+
+                            <label class="radio-label inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded cursor-pointer transition duration-300 ">
+                                <input type="radio" name="comment" value="favorable" class="radio-input peer hidden">
+                                <span>Favorable</span>
+                            </label>
+
+                            <label class="radio-label inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded cursor-pointer transition duration-300 ">
+                                <input type="radio" name="comment" value="unfavorable" class="radio-input peer hidden">
+                                <span>Unfavorable</span>
+                            </label>
+
+                            @error('comment')
+                                <span class="text-red-400 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
+
+
 
                         <div class="flex justify-end">
                             <button type="submit"
@@ -75,4 +97,24 @@
             </div>
         </div>
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const radioButtons = document.querySelectorAll('.radio-input');
+
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', () => {
+            document.querySelectorAll('.radio-label').forEach(label => {
+                label.classList.remove('bg-blue-500', 'text-white');
+                label.classList.add('bg-white', 'text-gray-700');
+            });
+
+
+            const selectedLabel = radio.closest('.radio-label');
+            selectedLabel.classList.add('bg-blue-500', 'text-white');
+            selectedLabel.classList.remove('bg-white', 'text-gray-700');
+        });
+    });
+});
+
+</script>
 @endsection

@@ -25,14 +25,14 @@
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-lg font-medium text-gray-900">{{$internship->company->username}}</h3>
-                                <p class="text-gray-600">{{$internship->offre->announce->title}}</p>
+                                <p class="text-gray-600">{{$internship->comment}}</p>
                             </div>
                             <div class="ml-auto">
-                                <button
-                                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg">
-                                    Finish
+                                <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg">
+                                    <a href="{{ asset('storage/' . $internship->certificate) }}" download>Certificate</a>
                                 </button>
                             </div>
+
                         </div>
 
                         @else

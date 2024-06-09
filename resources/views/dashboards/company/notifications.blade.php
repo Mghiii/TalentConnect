@@ -12,8 +12,8 @@
                         <tr>
                             <th class="px-4 py-3 text-left">Date</th>
                             <th class="px-4 py-3 text-left">Notification</th>
+                            <th class="px-4 py-3 text-left">Trainee Name</th>
                             <th class="px-4 py-3 text-left">Status</th>
-                            <th class="px-4 py-3 text-left">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,6 +22,7 @@
                         <tr class="border-b">
                             <td class="px-4 py-3">{{$offre->offre_date}}</td>
                             <td class="px-4 py-3">{{$offre->announce->title}}</td>
+                            <td class="px-4 py-3">{{$offre->trainee->first_name}} {{$offre->trainee->last_name}}</td>
                             @if ($offre->status == 'accepted')
                             <td class="px-4 py-3">
                                 <span class="bg-green-200 text-green-800 px-2 py-1 rounded-full">{{$offre->status}}</span>
@@ -36,9 +37,7 @@
                             </td>
                             @endif
 
-                            <td class="px-4 py-3">
-                                <a href="{{route('company.dashboard.currentInterns')}}" class="text-blue-500 hover:text-blue-700">show more</a>
-                            </td>
+
                         </tr>
                         @endforeach
                         @endforeach
