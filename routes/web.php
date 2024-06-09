@@ -18,6 +18,10 @@ Route::get('/page-not-found', function () {
 })->name('page-not-found');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+Route::put('/trainee/profile/imageupdate/{trainee}' , [TraineeController::class , 'updateImage'])->name('trainee.profile.image.update')->middleware('auth');
+Route::put('/company/profile/image/update/{company}' , [CompanyController::class , 'updateImage'])->name('company.updateImage')->middleware('auth');
+
+
 
 // Guest Routes
 Route::middleware(['guest'])->group(function () {
@@ -58,7 +62,6 @@ Route::middleware(['auth', 'role:company'])->group(function () {
 
     Route::get('/company/profile/edit/{id}', [CompanyController::class, 'editProfile'])->name('company.editProfile');
     Route::put('/company/profile/update/{id}', [CompanyController::class, 'updateProfile'])->name('company.updateProfile');
-    Route::put('/company/profile/image/update/{company}' , [CompanyController::class , 'updateImage'])->name('company.updateImage');
     Route::put('/company/update-password/{company}', [CompanyController::class, 'updatePassword'])->name('company.updatePassword');
     Route::delete('/company/profile/destroy/{company}', [CompanyController::class , 'destroyProfile'])->name('company.profile.destroy');
     Route::get('/company/dashboard/profile', [CompanyController::class, 'profile'])->name('company.dashboard.profile');
@@ -77,7 +80,6 @@ Route::middleware(['auth', 'role:trainee'])->group(function () {
     Route::get('/trainee/notifications', [TraineeController::class, 'notifications'])->name('trainee.notifications');
     Route::get('/trainee/help-centre', [TraineeController::class, 'help'])->name('trainee.help');
     Route::get('/trainee/profile', [TraineeController::class, 'profile'])->name('trainee.profile');
-    Route::put('/trainee/profile/imageupdate/{trainee}' , [TraineeController::class , 'updateImage'])->name('trainee.profile.image.update');
     Route::put('/trainee/profile/update/password/{trainee}' , [TraineeController::class , 'updatePassword'])->name('trainee.profile.update.password');
     Route::get('/trainee/announcement/details', [TraineeController::class, 'details'])->name('trainee.details');
 
@@ -92,12 +94,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/trainees', [AdminController::class, 'indexTrainees'])->name('admin.trainees');
     Route::get('admim/trainee/edit/{trainee}' , [AdminController::class , 'editTrainee'])->name('admin.trainee.edit');
     Route::put('admin/trainee/update/{trainee}' , [ AdminController::class , 'updateTrainee'])->name('admin.trainee.update');
-    Route::put('/trainee/profile/imageupdate/{trainee}' , [TraineeController::class , 'updateImage'])->name('trainee.profile.image.update');
     Route::get('admin/companies', [AdminController::class, 'indexCompanies'])->name('admin.companies');
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/companies/edit/{company}', [AdminController::class, 'editCompany'])->name('admin.companies.editCompany');
     Route::put('admin/companies/update/{company}', [AdminController::class, 'updateCompany'])->name('admin.companies.updateCompany');
-    Route::put('/company/profile/image/update/{company}' , [CompanyController::class , 'updateImage'])->name('company.updateImage');
     Route::delete('admin/companies/{company}', [AdminController::class, 'destroyCompany'])->name('admin.companies.destroy');
     Route::get('admin/companies/{id}/announcements', [AdminController::class, 'showCompanyAnnouncements'])->name('admin.companies.announcements');
     Route::get('admin/companies/announcements/edit/{announce}', [AdminController::class, 'editAnnounce'])->name('admin.companies.editAnnounce');
