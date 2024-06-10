@@ -13,14 +13,14 @@ class TraineeSeeder extends Seeder
      */
     public function run(): void
     {
-        Trainee::factory(10)->create();
+        Trainee::factory()->count(10)->create();
 
-        $user = User::create([
-            'name' => 'User Name',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password'), // Hash the password
-            'userable_id' => $company->id,
-            'userable_type' => Company::class,
-        ]);
+        // $user = User::create([
+        //     'name' => 'User Name',
+        //     'email' => 'user@example.com',
+        //     'password' => Hash::make('password'), // Hash the password
+        //     'userable_id' => $company->id,
+        //     'userable_type' => Company::class,
+        // ]);
     }
 }

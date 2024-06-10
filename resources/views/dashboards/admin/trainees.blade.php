@@ -127,7 +127,7 @@
                 @if ($trainees->isEmpty())
                     <p class="text-gray-700">No trainees.</p>
                 @else
-                    <div class="overflow-x-auto">
+                    <div class="max-h-[500px] overflow-y-auto">
                         <table class="w-full table-auto">
                             <thead class="bg-gray-200 text-gray-700">
                                 <tr>

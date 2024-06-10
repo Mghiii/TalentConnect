@@ -15,16 +15,6 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('companies')->insert([
-        'company_name' => 'sparky',
-        'contact_name' => 'taha',
-        'email' => 'sparky@gmail.com',
-        'password' => 'Sp4rky11',
-        'phone_number' => 1234567890,
-        'username' => 'sparky',
-        'address' => 'hfjkdshkjds',
-        'domain' =>'Design',
-        ]);
-
+        Company::factory()->count(10)->create();
     }
 }
