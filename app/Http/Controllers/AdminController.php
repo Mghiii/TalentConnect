@@ -145,11 +145,14 @@ class AdminController extends Controller
         $validation = $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
+            'certificate' => 'sometimes|mimes:pdf',
+            'comment' => 'sometimes'
         ]);
+
         if ($request->hasFile('certificate')) {
             $validation['certificate'] = $request->file('certificate')->store('certificates', 'public');
         }
-        $internship->fill($request->all())->save();
+        $internship->fill($validation)->save();
         $companyId = $internship->company_id;
         return redirect()->route('admin.companies.internships', ['company' => $companyId]);
     }
@@ -209,13 +212,14 @@ class AdminController extends Controller
         $validation = $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
+            'certificate' => 'sometimes|mimes:pdf',
+            'comment' => 'sometimes'
         ]);
 
         if ($request->hasFile('certificate')) {
             $validation['certificate'] = $request->file('certificate')->store('certificates', 'public');
         }
-
-        $internship->fill($request->all())->save();
+        $internship->fill($validation)->save();
 
         $traineeId = $internship->trainee_id;
 

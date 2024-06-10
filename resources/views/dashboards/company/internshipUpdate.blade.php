@@ -57,15 +57,6 @@
                                 <span class="text-red-400 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        {{-- <div>
-                            <label for="comment" class="block text-gray-700 font-bold mb-2">Comment:</label>
-                            <textarea name="comment" id="comment" rows="5"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 resize-none h-24"></textarea>
-                            @error('comment')
-                                <span class="text-red-400 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div> --}}
                         <div class="flex space-x-4 p-4">
                             <label for="comment" class="block text-gray-700 font-bold mb-2">Comment:</label>
 
