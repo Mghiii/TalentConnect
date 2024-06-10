@@ -6,7 +6,7 @@
         <div class="max-w-screen-lg w-full flex flex-col md:flex-row ">
             <div class="md:w-1/2 pb-14 bg-transparent pt-60 px-6">
                 <h1 class="text-3xl font-bold text-white">Welcome to Internship Opportunities <span
-                        class="text-gray-300 font-extrabold">TalentConnect</span></h1>
+                        class="text-gray-300 font-extrabold">Talent<span class="text-gray-400">Connect</span></span></h1>
                 <p class="text-white mt-4">Explore exciting internship opportunities with leading companies to kickstart your
                     career.</p>
             </div>
