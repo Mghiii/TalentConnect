@@ -62,13 +62,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Offer Submission Form -->
             <div class="w-full lg:w-1/2 bg-white shadow-2xl rounded-lg p-8">
                 @php
-                    $offre = $offres->firstWhere('trainee_id', $trainee->id);
-                    if ($offre) {
-                        $offre = $offre->firstWhere('announce_id', $announce->id);
-                    }
+                    $offre = $offres->first(function ($offre) use ($trainee, $announce) {
+                            return $offre->trainee_id == $trainee->id && $offre->announce_id == $announce->id;
+                    });
                 @endphp
 
                 @if (!$offre)
